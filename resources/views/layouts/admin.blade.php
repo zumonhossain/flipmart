@@ -226,7 +226,7 @@
                             <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Shipping Area</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('division') }}">Division</a></li>
-                                <li><a href="#">District</a></li>
+                                <li><a href="{{ route('district') }}">District</a></li>
                                 <li><a href="#">State</a></li>
                             </ul>
                         </li>

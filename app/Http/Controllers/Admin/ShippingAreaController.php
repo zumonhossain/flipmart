@@ -90,4 +90,93 @@ class ShippingAreaController extends Controller{
         );
         return redirect()->route('division')->with($notification);
     }
+
+
+    // District
+    public function district(){
+        $divisions = ShipDivision::where('division_status',1)->orderBy('id','DESC')->get();
+        $districts = ShipDistrict::where('district_status',1)->orderBy('id','DESC')->get();
+        return view('admin.ship-district.index',compact('districts','divisions'));
+    }
+
+    public function districtView($slug){
+        $data = ShipDistrict::where('district_status',1)->where('district_slug',$slug)->firstOrFail();
+        return view('admin.ship-district.view',compact('data'));
+    }
+
+    public function districtEdit($slug){
+        $divisions = ShipDivision::where('division_status',1)->orderBy('id','DESC')->get();
+        $district = ShipDistrict::where('district_status',1)->where('district_slug',$slug)->firstOrFail();
+        return view('admin.ship-district.edit',compact('district','divisions'));
+    }
+
+    public function districtInsert(Request $request){
+        $request->validate([
+            'division_id'=>'required',
+            'district_name'=>'required',
+        ],[
+            'division_id.required'=>'Please Enter Division Name!',
+            'district_name.required'=>'Please Enter District Name!',
+        ]);
+
+        $slug = uniqid('district-15');
+        $creator = Auth::user()->id;
+
+        ShipDistrict::insertGetId([
+            'division_id'=>$request['division_id'],
+            'district_name'=>$request['district_name'],
+            'district_slug'=>$slug,
+            'district_creator'=>$creator,
+            'created_at'=> Carbon::now(),
+        ]);
+
+        $notification = array(
+            'messege' =>'District Upload Success!',
+            'alert-type' =>'success',
+        );
+        return redirect()->route('district')->with($notification);
+
+    }
+
+    public function districtUpdate(Request $request){
+        $id = $request['id'];
+
+        $request->validate([
+            'division_id'=>'required',
+            'district_name'=>'required',
+        ],[
+            'division_id.required'=>'Please Enter Division Name!',
+            'district_name.required'=>'Please Enter District Name!',
+        ]);
+
+        $slug = uniqid('district-15');
+        $creator = Auth::user()->id;
+
+        ShipDistrict::where('district_status',1)->where('id',$id)->update([
+            'division_id'=>$request['division_id'],
+            'district_name'=>$request['district_name'],
+            'district_slug'=>$slug,
+            'district_creator'=>$creator,
+            'updated_at'=> Carbon::now(),
+        ]);
+        $notification = array(
+            'messege' =>'district Update Success!',
+            'alert-type' =>'success',
+        );
+        return redirect()->route('district')->with($notification);
+    }
+
+    public function districtSoftdelete(Request $request){
+        $id = $request['modal_id'];
+
+        ShipDistrict::where('district_status',1)->where('id',$id)->update([
+            'district_status'=>0,
+        ]);
+
+        $notification = array(
+            'messege' =>'district Softdelete Success!',
+            'alert-type' =>'success',
+        );
+        return redirect()->route('district')->with($notification);
+    }
 }

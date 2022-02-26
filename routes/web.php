@@ -108,6 +108,14 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     route::post('division/update',[ShippingAreaController::class,'divisionUpdate'])->name('division.update');
     route::post('division/softdelete',[ShippingAreaController::class,'divisionSoftdelete'])->name('division.softdelete');
 
+    // District
+    route::get('district',[ShippingAreaController::class,'district'])->name('district');
+    route::post('district/submit',[ShippingAreaController::class,'districtInsert'])->name('district.insert');
+    route::get('district/edit/{slug}',[ShippingAreaController::class,'districtEdit'])->name('district.edit');
+    route::get('district/view/{slug}',[ShippingAreaController::class,'districtView'])->name('district.view');
+    route::post('district/update',[ShippingAreaController::class,'districtUpdate'])->name('district.update');
+    route::post('district/softdelete',[ShippingAreaController::class,'districtSoftdelete'])->name('district.softdelete');
+
 
 });
 
