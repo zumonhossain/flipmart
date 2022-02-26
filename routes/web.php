@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShippingAreaController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Website\WebsiteController;
 
 /*
@@ -124,6 +125,14 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     route::get('state/view/{slug}',[ShippingAreaController::class,'stateView'])->name('state.view');
     route::post('state/update',[ShippingAreaController::class,'stateUpdate'])->name('state.update');
     route::post('state/softdelete',[ShippingAreaController::class,'stateSoftdelete'])->name('state.softdelete');
+
+    // Coupon
+    route::get('coupon',[CouponController::class,'index'])->name('coupon');
+    route::post('coupon/submit',[CouponController::class,'insert'])->name('coupon.insert');
+    route::get('coupon/edit/{slug}',[CouponController::class,'edit'])->name('coupon.edit');
+    route::get('coupon/view/{slug}',[CouponController::class,'view'])->name('coupon.view');
+    route::post('coupon/update',[CouponController::class,'update'])->name('coupon.update');
+    route::post('coupon/softdelete',[CouponController::class,'softdelete'])->name('coupon.softdelete');
 
 
 });

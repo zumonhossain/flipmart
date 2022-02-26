@@ -230,6 +230,9 @@
                                 <li><a href="{{ route('state') }}">State</a></li>
                             </ul>
                         </li>
+                        <li> 
+                            <a class="waves-effect waves-dark" href="{{ url('admin/coupon') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Coupon</span></a>
+                        </li>
                         <li>
                             <a class="waves-effect waves-dark" href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="mdi mdi-power"></i><span class="hide-menu">Logout</span></a>
                         </li>
