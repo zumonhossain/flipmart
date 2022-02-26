@@ -116,6 +116,15 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     route::post('district/update',[ShippingAreaController::class,'districtUpdate'])->name('district.update');
     route::post('district/softdelete',[ShippingAreaController::class,'districtSoftdelete'])->name('district.softdelete');
 
+    // state
+    route::get('state',[ShippingAreaController::class,'state'])->name('state');
+    Route::get('/district/ajax/{dis_id}',[ShippingAreaController::class,'getDistrict']);
+    route::post('state/submit',[ShippingAreaController::class,'stateInsert'])->name('state.insert');
+    route::get('state/edit/{slug}',[ShippingAreaController::class,'stateEdit'])->name('state.edit');
+    route::get('state/view/{slug}',[ShippingAreaController::class,'stateView'])->name('state.view');
+    route::post('state/update',[ShippingAreaController::class,'stateUpdate'])->name('state.update');
+    route::post('state/softdelete',[ShippingAreaController::class,'stateSoftdelete'])->name('state.softdelete');
+
 
 });
 

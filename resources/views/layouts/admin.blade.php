@@ -227,7 +227,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('division') }}">Division</a></li>
                                 <li><a href="{{ route('district') }}">District</a></li>
-                                <li><a href="#">State</a></li>
+                                <li><a href="{{ route('state') }}">State</a></li>
                             </ul>
                         </li>
                         <li>
