@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Website\WebsiteController;
 
 /*
@@ -96,6 +97,17 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     Route::get('product-inactive/{slug}',[ProductController::class,'inactive']);
     Route::get('product-active/{slug}',[ProductController::class,'active']);
     route::post('product/softdelete',[ProductController::class,'softdelete'])->name('product.softdelete');
+
+    //Shipping Area routes
+
+    // division
+    route::get('division',[ShippingAreaController::class,'division'])->name('division');
+    route::post('division/submit',[ShippingAreaController::class,'divisionInsert'])->name('division.insert');
+    route::get('division/edit/{slug}',[ShippingAreaController::class,'divisionEdit'])->name('division.edit');
+    route::get('division/view/{slug}',[ShippingAreaController::class,'divisionView'])->name('division.view');
+    route::post('division/update',[ShippingAreaController::class,'divisionUpdate'])->name('division.update');
+    route::post('division/softdelete',[ShippingAreaController::class,'divisionSoftdelete'])->name('division.softdelete');
+
 
 });
 

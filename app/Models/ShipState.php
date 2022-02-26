@@ -10,4 +10,12 @@ class ShipState extends Model{
 
     protected $guarded = [];
     
+    public function division(){
+        return $this->belongsTo('App\Models\ShipDivision');
+    }
+
+    public function district(){
+        return $this->belongsTo('App\Models\ShipDistrict');
+    }
+    
 }
