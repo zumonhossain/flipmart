@@ -35,6 +35,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Admin'], function(){
     route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     
+    // All Users
+    route::get('all-users',[AdminController::class,'allUsers'])->name('all-users');
+    Route::get('user-banned/{user_id}',[AdminController::class,'banned'])->name('banned');
+    Route::get('user-unbanned/{user_id}',[AdminController::class,'unBanned'])->name('unBanned');
+
     //Banner routes
     route::get('banner',[BannerController::class,'index'])->name('banner');
     route::post('banner/submit',[BannerController::class,'insert'])->name('banner.insert');

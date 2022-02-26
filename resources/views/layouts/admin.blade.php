@@ -202,6 +202,9 @@
                         <li> 
                             <a class="waves-effect waves-dark" href="{{ url('admin/dashboard') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
+                        <li> 
+                            <a class="waves-effect waves-dark" href="{{ url('admin/all-users') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">All Users</span></a>
+                        </li>
                         <li>
                             <a class="waves-effect waves-dark" href="{{ url('admin/banner') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Banner</span></a>
                         </li>

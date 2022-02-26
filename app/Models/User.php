@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Cache;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,8 @@ class User extends Authenticatable
         'image',
         'password',
         'role_id',
+        'user_banned',
+        'last_seen'
     ];
 
     /**
@@ -47,5 +50,10 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo('App\Models\Role');
+    }
+
+    //user active show
+    public function userIsOnline(){
+        return Cache::has('user-is-online' . $this->id);
     }
 }
