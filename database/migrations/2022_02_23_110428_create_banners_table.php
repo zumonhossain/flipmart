@@ -22,7 +22,7 @@ class CreateBannersTable extends Migration
             $table->string('ban_url',200)->nullable();
             $table->string('ban_image',50)->nullable();
             $table->string('ban_slug',50)->nullable();
-            $table->string('ban_creator')->nullable();
+            $table->integer('ban_creator')->nullable();
             $table->integer('ban_status')->default(1);
             $table->timestamps();
         });

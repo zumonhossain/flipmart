@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Website\WebsiteController;
 
 /*
@@ -34,6 +35,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Admin'], function(){
     route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     
+    //Banner routes
+    route::get('banner',[BannerController::class,'index'])->name('banner');
+    route::post('banner/submit',[BannerController::class,'insert'])->name('banner.insert');
+    route::get('banner/view/{slug}',[BannerController::class,'view'])->name('banner.view');
+    route::get('banner/edit/{slug}',[BannerController::class,'edit'])->name('banner.edit');
+    route::post('banner/update',[BannerController::class,'update'])->name('banner.update');
+    route::post('banner/softdelete',[BannerController::class,'softdelete'])->name('banner.softdelete');
+
     //Brand Routes
     route::get('brand',[BrandController::class,'index'])->name('brand');
     route::get('brand/edit/{slug}',[BrandController::class,'edit'])->name('brand.edit');
