@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-md-3 control-label col-form-label"> Banner Image <span class="require_star">*</span></label>
+                            <label class="col-md-3 control-label col-form-label"> Banner Picture <span class="require_star">*</span></label>
                             <div class="col-md-9">
                                 <input type="file" name="ban_image" class="form-control" onchange="mainThambUrl(this)">
                                 @error('ban_image')
