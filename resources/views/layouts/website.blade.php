@@ -188,7 +188,6 @@
 											<a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a>
 										</li>
 
-
 										@foreach($categories as $category)
 											<li class="dropdown yamm mega-menu">
 												<a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $category->category_name }}</a>
@@ -225,7 +224,6 @@
 												</ul>
 											</li>
 										@endforeach
-
 
 									</ul><!-- /.navbar-nav -->
 									<div class="clearfix"></div>				
