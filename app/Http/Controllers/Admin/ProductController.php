@@ -60,7 +60,6 @@ class ProductController extends Controller{
             'product_size'=>'required',
             'product_color'=>'required',
             'selling_price'=>'required',
-            'discount_price'=>'required',
             'product_thambnail'=>'required',
             'multi_img'=>'required',
             'short_description'=>'required',
@@ -77,7 +76,6 @@ class ProductController extends Controller{
             'product_size.required'=>'please enter product size!',
             'product_color.required'=>'please enter product color!',
             'selling_price.required'=>'please enter selling price!',
-            'discount_price.required'=>'please enter discount price!',
             'product_thambnail.required'=>'please enter product thambnail!',
             'multi_img.required'=>'please enter product multiple image!',
             'short_description.required'=>'please enter short description!',
@@ -112,7 +110,7 @@ class ProductController extends Controller{
             'featured'=>$request['featured'],
             'special_offer'=>$request['special_offer'],
             'special_deals'=>$request['special_deals'],
-            'product_thambnail'=>$save_url,
+            'product_thambnail'=>$save_url, 
             'product_slug'=>$slug,
             'product_creator'=>$creator,
             'created_at' => Carbon::now(),
@@ -156,7 +154,6 @@ class ProductController extends Controller{
             'product_size'=>'required',
             'product_color'=>'required',
             'selling_price'=>'required',
-            'discount_price'=>'required',
             'short_description'=>'required',
             'long_description'=>'required',
         ],[
@@ -171,10 +168,9 @@ class ProductController extends Controller{
             'product_size.required'=>'please enter product size!',
             'product_color.required'=>'please enter product color!',
             'selling_price.required'=>'please enter selling price!',
-            'discount_price.required'=>'please enter discount price!',
             'short_description.required'=>'please enter short description!',
             'long_description.required'=>'please enter long description!',
-        ]);
+        ]); 
         
         $id = $request['id'];
         $oldImage = $request['old_img'];

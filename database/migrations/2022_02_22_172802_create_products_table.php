@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->nullable();
             $table->integer('subcategory_id')->nullable();
             $table->integer('subsubcategory_id')->nullable();
-            $table->string('product_name',50)->nullable();
+            $table->string('product_name',50)->nullable(); 
             $table->string('product_code',100)->nullable();
             $table->string('product_qty')->nullable();
             $table->string('product_tags',100)->nullable();

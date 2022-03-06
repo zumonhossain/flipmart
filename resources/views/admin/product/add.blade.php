@@ -138,11 +138,8 @@
                             </div> 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="form-control-label">Discount Price<span class="require_star">*</span></label>
+                                    <label class="form-control-label">Discount Price</label>
                                     <input class="form-control" type="text" name="discount_price" value="{{ old('discount_price') }}">
-                                    @error('discount_price')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                             </div> 
                             <div class="col-md-4">
@@ -211,7 +208,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="text-center mt-5">
-                                    <button type="submit" class="btn btn-dark registration-btn ">Save Category</button>
+                                    <button type="submit" class="btn btn-dark registration-btn ">Save</button>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +236,7 @@
                         },
                     });
                 } else {
-                    alert('danger');
+                    alert('danger'); 
                 }
             });
         });

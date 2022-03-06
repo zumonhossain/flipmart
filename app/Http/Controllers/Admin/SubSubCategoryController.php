@@ -12,8 +12,8 @@ use Auth;
 
 class SubSubCategoryController extends Controller{
     public function index(){
-        $categories=Category::where('category_status',1)->orderBy('id','DESC')->get();
-        $subSubCategory=SubSubCategory::where('subsubcategory_status',1)->orderBy('id','DESC')->get();
+        $categories=Category::where('category_status',1)->orderBy('id','ASC')->get();
+        $subSubCategory=SubSubCategory::where('subsubcategory_status',1)->orderBy('id','ASC')->get();
         return view('admin.sub-sub-category.index',compact('categories','subSubCategory'));
     }
 

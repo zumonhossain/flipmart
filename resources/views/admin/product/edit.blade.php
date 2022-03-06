@@ -141,11 +141,8 @@
                             </div> 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="form-control-label">Discount Price<span class="require_star">*</span></label>
+                                    <label class="form-control-label">Discount Price</label>
                                     <input class="form-control" type="text" name="discount_price" value="{{ $product->discount_price }}">
-                                    @error('discount_price')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                             </div> 
                             <div class="col-md-6">
