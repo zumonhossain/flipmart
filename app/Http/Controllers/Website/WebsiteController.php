@@ -49,5 +49,11 @@ class WebsiteController extends Controller{
         $categories = Category::orderBy('category_name','ASC')->get();
         return view('website.tag-product',compact('products','categories'));
     }
+    //subcategory wise product show
+    public function subCatWiseProduct($subcat_id,$slug){
+        $products = Product::where('product_status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(1);
+        $categories = Category::orderBy('category_name','ASC')->get();
+        return view('website.sub-category-product',compact('products','categories'));
+    }
     
 }

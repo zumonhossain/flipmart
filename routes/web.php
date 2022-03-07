@@ -153,3 +153,5 @@ Route::get('/',[WebsiteController::class, 'index']);
 route::get('product/details/{id}/{slug}',[WebsiteController::class,'productDetails'])->name('productDetails');
 //product tags
 route::get('product/tag/{tag}',[WebsiteController::class,'tagWiseProduct'])->name('tagWiseProduct');
+//subcategory wise product show
+route::get('subcategory/product/{subcat_id}/{slug}',[WebsiteController::class,'subCatWiseProduct'])->name('subCatWiseProduct');
