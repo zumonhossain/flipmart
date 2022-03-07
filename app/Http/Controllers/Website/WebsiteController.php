@@ -40,7 +40,10 @@ class WebsiteController extends Controller{
         $size = $product->product_size;
         $product_size = explode(',',$size);
 
-        return view('website.product-details',compact('product','multiImgs','color','product_color','size','product_size'));
+        $cat_id = $product->category_id;
+        $relatedProducts = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
+
+        return view('website.product-details',compact('product','multiImgs','color','product_color','size','product_size','relatedProducts'));
     }
 
     //tag wise product
