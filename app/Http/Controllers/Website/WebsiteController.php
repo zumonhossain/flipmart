@@ -64,5 +64,22 @@ class WebsiteController extends Controller{
         $categories = Category::orderBy('category_name','ASC')->get();
         return view('website.sub-sub-category-product',compact('products','categories'));
     }
+
+    // =========================== Product view with ajax================
+    public function productViewAjax($product_id){
+        $product = Product::with('category','brand')->findOrFail($product_id);
+
+        $color = $product->product_color;
+        $product_color = explode(',',$color);
+        
+        $size = $product->product_size;
+        $produt_size = explode(',',$size);
+        
+        return response()->json(array(
+            'product' => $product,
+            'color' => $product_color,
+            'size' => $produt_size,
+        ));
+    }
     
 }

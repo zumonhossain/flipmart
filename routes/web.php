@@ -157,3 +157,5 @@ route::get('product/tag/{tag}',[WebsiteController::class,'tagWiseProduct'])->nam
 route::get('subcategory/product/{subcat_id}/{slug}',[WebsiteController::class,'subCatWiseProduct'])->name('subCatWiseProduct');
 //Sub-subcategory wise product show
 route::get('sub/subcategory/product/{subsubcat_id}/{slug}',[WebsiteController::class,'subSubCatWiseProduct'])->name('subSubCatWiseProduct');
+//product view modal with ajax
+route::get('product/view/modal/{id}',[WebsiteController::class,'productViewAjax'])->name('productViewAjax');
