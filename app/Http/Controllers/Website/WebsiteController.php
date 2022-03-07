@@ -13,10 +13,10 @@ use App\Models\Brand;
 
 class WebsiteController extends Controller{
     public function index(){
-        $hot_deals = Product::where('hot_deals',1)->where('product_status',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->get();
+        $special_offers = Product::where('special_offer',1)->where('product_status',1)->orderBy('id','DESC')->limit(5)->get();
         $featureds = Product::where('featured',1)->where('product_status',1)->orderBy('id','DESC')->get();
         $products = Product::where('product_status',1)->orderBy('id','DESC')->get();
-        return view('website.home.home',compact('products','featureds','hot_deals'));
+        return view('website.home.home',compact('products','featureds','special_offers'));
     }
 
     public function productDetails($id,$slug){
