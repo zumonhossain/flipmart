@@ -101,8 +101,18 @@
 					</div>
 					<!-- ============== WIDE PRODUCTS END =================== -->
 
-					@include('website.includes.featured-product')
 
+					<!-- ============== Featured Product Start =================== -->
+						@include('website.includes.featured-product')
+					<!-- ============== Featured Product End =================== -->
+
+
+					<!-- ============= Skip Category PRODUCTS Start ============= -->
+						@include('website.includes.skip-category-product')
+					<!-- ============= Skip Category PRODUCTS END ============= -->
+
+
+					
 					<!-- =================== WIDE PRODUCTS =============== -->
 					<div class="wide-banners wow fadeInUp outer-bottom-xs">
 						<div class="row">
