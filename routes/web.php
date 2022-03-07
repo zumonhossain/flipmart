@@ -150,3 +150,4 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
 // ================= Fontend Routes ======================
 // Website Route Start
 Route::get('/',[WebsiteController::class, 'index']);
+route::get('product/details/{id}/{slug}',[WebsiteController::class,'productDetails'])->name('productDetails');
