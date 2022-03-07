@@ -13,8 +13,9 @@ use App\Models\Brand;
 
 class WebsiteController extends Controller{
     public function index(){
+        $featureds = Product::where('featured',1)->where('product_status',1)->orderBy('id','DESC')->get();
         $products = Product::where('product_status',1)->orderBy('id','DESC')->get();
-        return view('website.home.home',compact('products'));
+        return view('website.home.home',compact('products','featureds'));
     }
 
     public function productDetails($id,$slug){
