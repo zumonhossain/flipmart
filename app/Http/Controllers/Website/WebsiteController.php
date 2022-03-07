@@ -42,5 +42,12 @@ class WebsiteController extends Controller{
 
         return view('website.product-details',compact('product','multiImgs','color','product_color','size','product_size'));
     }
+
+    //tag wise product
+    public function tagWiseProduct($tag){
+        $products = Product::where('product_status',1)->where('product_tags',$tag)->orderBy('id','DESC')->paginate(1);
+        $categories = Category::orderBy('category_name','ASC')->get();
+        return view('website.tag-product',compact('products','categories'));
+    }
     
 }

@@ -151,3 +151,5 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
 // Website Route Start
 Route::get('/',[WebsiteController::class, 'index']);
 route::get('product/details/{id}/{slug}',[WebsiteController::class,'productDetails'])->name('productDetails');
+//product tags
+route::get('product/tag/{tag}',[WebsiteController::class,'tagWiseProduct'])->name('tagWiseProduct');
