@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Website\WebsiteController;
+use App\Http\Controllers\Website\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -159,3 +160,5 @@ route::get('subcategory/product/{subcat_id}/{slug}',[WebsiteController::class,'s
 route::get('sub/subcategory/product/{subsubcat_id}/{slug}',[WebsiteController::class,'subSubCatWiseProduct'])->name('subSubCatWiseProduct');
 //product view modal with ajax
 route::get('product/view/modal/{id}',[WebsiteController::class,'productViewAjax'])->name('productViewAjax');
+// add to cart
+route::post('/cart/data/store/{id}',[CartController::class,'addToCart'])->name('addToCart');
