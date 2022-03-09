@@ -46,4 +46,18 @@ class CartController extends Controller{
             return response()->json(['success' => 'Sucessfully Added On Your Cart']);
         }
     }
+
+    // ==================== mini cart section =======================
+
+    public function miniCart(){
+        $carts = Cart::content();
+        $cartQty = Cart::count();
+        $cartTotal = Cart::total();
+
+        return response()->json(array(
+            'carts' => $carts,
+            'cartQty' => $cartQty,
+            'cartTotal' => round($cartTotal),
+        ));
+    }
 }

@@ -162,3 +162,5 @@ route::get('sub/subcategory/product/{subsubcat_id}/{slug}',[WebsiteController::c
 route::get('product/view/modal/{id}',[WebsiteController::class,'productViewAjax'])->name('productViewAjax');
 // add to cart
 route::post('/cart/data/store/{id}',[CartController::class,'addToCart'])->name('addToCart');
+//mini cart
+route::get('product/mini/cart',[CartController::class,'miniCart'])->name('miniCart');
