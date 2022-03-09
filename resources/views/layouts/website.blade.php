@@ -413,7 +413,7 @@
 									<label for="qty">Quantity</label>
 									<input type="number" class="form-control" id="qty" value="1" min="1">
 								</div>
-								<input type="hidden" id="product_id">
+								<input type="text" id="product_id">
 								<button type="submit" class="btn btn-danger" onclick="addToCart()">Add To Cart</button>
 							</div>
 						</div>
@@ -436,6 +436,8 @@
 		<script src="{{ asset('contents/website') }}/assets/js/wow.min.js"></script>
 		<script src="{{ asset('contents/website') }}/assets/js/scripts.js"></script>
 		<script src="{{ asset('contents/website') }}/assets/js/custom.js"></script>
+
+		<script src="{{ asset('contents/website') }}/assets/js/sweetalert2@8.js"></script>
 
 		<script src="{{ asset('contents/website') }}/assets/js/toastr.min.js"></script>
 		<script>
@@ -549,7 +551,25 @@
 					url: "/cart/data/store/"+id,
 					success:function(data){
 						$('#closeModal').click();
-						console.log(data)
+						//  start message
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top-end',
+							showConfirmButton: false,
+							timer: 3000
+						})
+						if($.isEmptyObject(data.error)){
+								Toast.fire({
+								type: 'success',
+								title: data.success
+								})
+						}else{
+							Toast.fire({
+								type: 'error',
+								title: data.error
+							})    
+						}
+						//  end message
 					}
 				})
 			}
@@ -559,6 +579,5 @@
 
 
 		</script>
-	
 	</body>
 </html>

@@ -75,7 +75,7 @@
                             </div><!-- /.gallery-holder -->        			
                             <div class='col-sm-6 col-md-7 product-info-block'>
                                 <div class="product-info">
-                                    <h1 class="name">{{ $product->product_name }}</h1>
+                                    <h1 id="pname" class="name">{{ $product->product_name }}</h1>
                                     
                                     <div class="rating-reviews m-t-20">
                                         <div class="row">
@@ -139,14 +139,18 @@
                                         </div><!-- /.row -->
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label for="color">Select Color</label>
-                                                    <select class="form-control" id="color">
-                                                        @foreach ($product_color as $color)
-                                                            <option value="{{ $color }}">{{ ucwords($color) }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                @if ($product->product_color == null)
+
+                                                @else
+                                                    <div class="form-group">
+                                                        <label for="color">Select Color</label>
+                                                        <select class="form-control" id="color">
+                                                            @foreach ($product_color as $color)
+                                                                <option value="{{ $color }}">{{ ucwords($color) }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="col-sm-6">
                                                 @if ($product->product_size == null)
@@ -179,13 +183,14 @@
                                                             <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                                             <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
-                                                        <input type="text" value="1">
+                                                        <input type="number" class="form-control" id="qty" value="1" min="1">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-7">
-                                                <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                                <input type="hidden" id="product_id" value="{{ $product->id }}">
+								                <button type="submit" class="btn btn-danger" onclick="addToCart()">Add To Cart</button>
                                             </div>
                                         </div><!-- /.row -->
                                     </div><!-- /.quantity-container -->
