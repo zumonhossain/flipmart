@@ -571,6 +571,8 @@
 		</script>
 
 		<script>
+
+			/// mini cart product add start
 			function miniCart(){
 				$.ajax({
 					type:'GET',
@@ -614,9 +616,9 @@
 				})
 			}
 			miniCart();
+			/// mini cart product add end
 
 			/// mini cart remove start
-
 			function miniCartRemove(rowId){
 				$.ajax({
 					type:'GET',
@@ -649,9 +651,42 @@
 					}
 				})
 			}
-
 			// mini cart remove end
 		</script>
+
+		<!-- =============== Start wishlist ==================== -->
+		<script>
+			function addToWishlist(product_id){
+				$.ajax({
+					type: "POST",
+					dataType: 'json',
+					url: "{{ url('/add-to-wishlist/') }}/"+product_id,
+					success:function(data){
+
+						//  start sweet alert message
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top-end',
+							showConfirmButton: false,
+							timer: 3000
+						})
+						if($.isEmptyObject(data.error)){
+							Toast.fire({
+								type: 'success',
+								title: data.success
+							})
+						}else{
+							Toast.fire({
+								type: 'error',
+								title: data.error
+							})
+						}
+						//  end sweet alert message
+					}
+				})
+			}
+		</script>
+		<!-- =============== End wishlist ==================== -->
 		
 	</body>
 </html>

@@ -146,6 +146,10 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::post('update/image',[UserController::class,'updateImage'])->name('update.image');
     Route::get('update/password',[UserController::class,'updatePassPage'])->name('update-password');
     Route::post('store/password',[UserController::class,'storePassword'])->name('password-store');
+
+
+
+
 });
 
 // ================= Fontend Routes ======================
@@ -166,3 +170,5 @@ route::post('/cart/data/store/{id}',[CartController::class,'addToCart'])->name('
 route::get('product/mini/cart',[CartController::class,'miniCart'])->name('miniCart');
 //mini cart remove
 route::get('/minicart/product-remove/{rowId}',[CartController::class,'miniCartRemove'])->name('miniCartRemove');
+//wishlist
+route::post('/add-to-wishlist/{product_id}',[CartController::class,'addToWishlist']);
