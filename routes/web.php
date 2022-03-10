@@ -152,6 +152,8 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     route::get('wishlist',[WishlistController::class,'wishlist'])->name('wishlist');
     //get wishlist with ajax
     route::get('/get-wishlist-product',[WishlistController::class,'readAllProduct'])->name('readAllProduct');
+    // wishlist remove with ajax
+    route::get('/wishlist-remove/{id}',[WishlistController::class,'destory'])->name('destory');
 
 
 

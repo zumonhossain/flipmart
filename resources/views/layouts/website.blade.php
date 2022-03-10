@@ -719,7 +719,7 @@
 										<button class="btn-upper btn btn-primary" type="button" title="Add Cart" data-toggle="modal" data-target="#cartModal" id="${value.product_id}" onclick="productView(this.id)">Add to cart</button>
 									</td>
 									<td class="col-md-1 close-btn">
-										<a href="#" class=""><i class="fa fa-times"></i></a>
+										<button type="submit" class="" id="${value.id}" onclick="wishlistRemove(this.id)" ><i class="fa fa-times"></i></button>
 									</td>
 								</tr>
 							`
@@ -730,6 +730,38 @@
 				})
 			}
 			wishlist();
+
+			function wishlistRemove(id){
+				$.ajax({
+					type:'GET',
+					url: "{{ url('/user/wishlist-remove/') }}/"+id,
+					dataType:'json',
+					success:function(data){
+
+						wishlist();
+						
+						//  start message
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top-end',
+							showConfirmButton: false,
+							timer: 3000
+						})
+						if($.isEmptyObject(data.error)){
+							Toast.fire({
+								type: 'success',
+								title: data.success
+							})
+						}else{
+							Toast.fire({
+								type: 'error',
+								title: data.error
+							})
+						}
+						//  end message
+					}
+				});
+			}
 		</script>
 		<!-- wishlist product show end -->
 
