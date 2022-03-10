@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
@@ -147,6 +148,10 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::get('update/password',[UserController::class,'updatePassPage'])->name('update-password');
     Route::post('store/password',[UserController::class,'storePassword'])->name('password-store');
 
+    //wishlist
+    route::get('wishlist',[WishlistController::class,'wishlist'])->name('wishlist');
+    //get wishlist with ajax
+    route::get('/get-wishlist-product',[WishlistController::class,'readAllProduct'])->name('readAllProduct');
 
 
 

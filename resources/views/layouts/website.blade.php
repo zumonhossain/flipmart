@@ -35,7 +35,7 @@
 						<div class="cnt-account">
 							<ul class="list-unstyled">
 								<li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-								<li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+								<li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
 								<li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
 								<li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
 								@auth
@@ -655,6 +655,8 @@
 		</script>
 
 		<!-- =============== Start wishlist ==================== -->
+
+		<!-- wishlist product add start -->
 		<script>
 			function addToWishlist(product_id){
 				$.ajax({
@@ -686,6 +688,51 @@
 				})
 			}
 		</script>
+		<!-- wishlist product add end -->
+
+		<!-- wishlist product show start -->
+		<script>
+			function wishlist(){
+				$.ajax({
+					type:'GET',
+					url: "{{ url('/user/get-wishlist-product') }}",
+					dataType:'json',
+					success:function(response){
+
+						var rows = ""
+
+						$.each(response, function(key,value){
+							rows += `
+								<tr>
+									<td class="col-md-2"><img src="/${value.product.product_thambnail}" alt="imga"></td>
+									<td class="col-md-7">
+										<div class="product-name"><a href="#">${value.product.product_name}</a></div>
+										<div class="price">
+										${value.product.discount_price == null
+											? `$${value.product.selling_price}`
+											:
+											`$${value.product.discount_price} <span>$${value.product.selling_price}</span>`
+										}
+										</div>
+									</td>
+									<td class="col-md-2">
+										<button class="btn-upper btn btn-primary" type="button" title="Add Cart" data-toggle="modal" data-target="#cartModal" id="${value.product_id}" onclick="productView(this.id)">Add to cart</button>
+									</td>
+									<td class="col-md-1 close-btn">
+										<a href="#" class=""><i class="fa fa-times"></i></a>
+									</td>
+								</tr>
+							`
+						});
+
+						$('#wishlist').html(rows);
+					}
+				})
+			}
+			wishlist();
+		</script>
+		<!-- wishlist product show end -->
+
 		<!-- =============== End wishlist ==================== -->
 		
 	</body>
