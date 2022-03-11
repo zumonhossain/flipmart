@@ -157,9 +157,13 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
 
 
 
+
+
+
+
 });
 
-// ================= Fontend Routes ======================
+// ================= Website Routes ======================
 // Website Route Start
 Route::get('/',[WebsiteController::class, 'index']);
 route::get('product/details/{id}/{slug}',[WebsiteController::class,'productDetails'])->name('productDetails');
@@ -179,3 +183,7 @@ route::get('product/mini/cart',[CartController::class,'miniCart'])->name('miniCa
 route::get('/minicart/product-remove/{rowId}',[CartController::class,'miniCartRemove'])->name('miniCartRemove');
 //wishlist
 route::post('/add-to-wishlist/{product_id}',[CartController::class,'addToWishlist']);
+
+//cart
+route::get('my-cart',[CartController::class,'create'])->name('cart');
+route::get('/get-cart-product',[CartController::class,'getAllCart'])->name('getAllCart');

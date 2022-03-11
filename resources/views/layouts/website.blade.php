@@ -36,7 +36,7 @@
 							<ul class="list-unstyled">
 								<li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
 								<li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-								<li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+								<li><a href="{{ route('cart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
 								<li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
 								@auth
 									<li><a href="{{ route('user.dashboard') }}"><i class="icon fa fa-lock"></i>Profile</a></li>
@@ -766,6 +766,68 @@
 		<!-- wishlist product show end -->
 
 		<!-- =============== End wishlist ==================== -->
+
+
+		<!-- ================= cart page start ====================== -->
+		<script>
+
+			// ============ get cart product show start ==============
+			function cart(){
+				$.ajax({
+					type:'GET',
+					url: "{{ url('/get-cart-product') }}",
+					dataType:'json',
+					success:function(response){
+
+					var rows = ""
+
+					$.each(response.carts, function(key,value){
+						rows += `<tr>
+							<td class="col-md-2"><img src="/${value.options.image}" alt="imga" style="height:60px; width:60px;"></td>
+							<td class="col-md-2">
+								<div class="product-name"><strong>${value.name}</strong></div>
+								<strong>
+								$${value.price}
+								</strong>
+							</td>
+							<td class="col-md-2">
+								<strong>${value.options.color}</strong>
+							</td>
+							<td class="col-md-2">
+								${value.options.size == null
+									? `<span >......</span>`
+									:
+									`<strong>${value.options.size}</strong>`
+								}
+							</td>
+							<td class="col-md-2">
+
+								${value.qty > 1
+								? ` <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)">-</button>`
+								: ` <button type="submit" class="btn btn-success btn-sm" disabled>-</button>`
+								}                 
+								<input type="text" value="${value.qty}" min="1" max="100" disabled style="width:25px;">
+								<button type="submit" id="${value.rowId}" onclick="cartIncrement(this.id)" class="btn btn-danger btn-sm">+</button>
+
+							</td>
+							<td class="col-md-1">
+								<strong>$${value.subtotal}</strong>
+							</td>
+							<td class="col-md-1 close-btn">
+								<button type="submit" class="" id="${value.rowId}" onclick="CartRemove(this.id)" ><i class="fa fa-times"></i></button>
+							</td>
+						</tr>`
+					});
+					$('#cartPage').html(rows);
+					}
+				})
+			}
+			cart();
+			// ============ get cart product show end ==============
+
+
+		</script>
+		<!-- ================= End cart page ====================== -->
 		
 	</body>
 </html>

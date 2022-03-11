@@ -89,4 +89,24 @@ class CartController extends Controller{
             return response()->json(['error' => 'At First Login Your Account']);
         }
     }
+
+    //================================= Cart Page =======================================
+
+    //create
+    public function create(){
+        return view('website.cart-page');
+    }
+
+    //get all product
+    public function getAllCart(){
+        $carts = Cart::content();
+        $cartQty = Cart::count();
+        $cartTotal = Cart::total();
+
+        return response()->json(array(
+            'carts' => $carts,
+            'cartQty' => $cartQty,
+            'cartTotal' => round($cartTotal),
+        ));
+    }
 }
