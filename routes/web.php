@@ -187,3 +187,4 @@ route::post('/add-to-wishlist/{product_id}',[CartController::class,'addToWishlis
 //cart
 route::get('my-cart',[CartController::class,'create'])->name('cart');
 route::get('/get-cart-product',[CartController::class,'getAllCart'])->name('getAllCart');
+route::get('/cart-remove/{rowId}',[CartController::class,'destory'])->name('destory');

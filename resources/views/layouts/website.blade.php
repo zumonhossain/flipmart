@@ -778,7 +778,7 @@
 					url: "{{ url('/get-cart-product') }}",
 					dataType:'json',
 					success:function(response){
-
+						
 					var rows = ""
 
 					$.each(response.carts, function(key,value){
@@ -803,18 +803,18 @@
 							<td class="col-md-2">
 
 								${value.qty > 1
-								? ` <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)">-</button>`
+								? ` <button type="submit" class="btn btn-success btn-sm">-</button>`
 								: ` <button type="submit" class="btn btn-success btn-sm" disabled>-</button>`
 								}                 
 								<input type="text" value="${value.qty}" min="1" max="100" disabled style="width:25px;">
-								<button type="submit" id="${value.rowId}" onclick="cartIncrement(this.id)" class="btn btn-danger btn-sm">+</button>
+								<button type="submit" class="btn btn-danger btn-sm">+</button>
 
 							</td>
 							<td class="col-md-1">
 								<strong>$${value.subtotal}</strong>
 							</td>
 							<td class="col-md-1 close-btn">
-								<button type="submit" class="" id="${value.rowId}" onclick="CartRemove(this.id)" ><i class="fa fa-times"></i></button>
+								<button type="submit" class="" id="${value.rowId}" onclick="cartRemove(this.id)" ><i class="fa fa-times"></i></button>
 							</td>
 						</tr>`
 					});
@@ -825,6 +825,71 @@
 			cart();
 			// ============ get cart product show end ==============
 
+			// ============ cart remove start ==============
+			function cartRemove(id){
+				$.ajax({
+					type:'GET',
+					url: "{{ url('/cart-remove/') }}/"+id,
+					dataType:'json',
+					success:function(data){
+
+						cart();
+						miniCart();
+
+						//  start sweet alert message
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top-end',
+							showConfirmButton: false,
+							timer: 3000
+						})
+						if($.isEmptyObject(data.error)){
+							Toast.fire({
+								type: 'success',
+								title: data.success
+							})
+						}else{
+							Toast.fire({
+								type: 'error',
+								title: data.error
+							})
+						}
+						//  end sweet alert message
+
+					}
+				});
+			}
+			// ============ cart remove end ==============
+
+			// ============ cart increment start ==============
+			function cartIncrement(rowId){
+				$.ajax({
+					type:'GET',
+					url: "{{ url('/cart-increment/') }}/"+rowId,
+					dataType:'json',
+					success:function(data){
+						couponCalculation();
+						cart();
+						miniCart();
+					}
+				});
+			}
+			// ============ cart increment end ==============
+
+			// ============ cart deccrement start ==============
+			function cartDecrement(rowId){
+				$.ajax({
+					type:'GET',
+					url: "{{ url('/cart-decrement/') }}/"+rowId,
+					dataType:'json',
+					success:function(data){
+						couponCalculation();
+						cart();
+						miniCart();
+					}
+				});
+			}
+			// ============ cart deccrement end ==============
 
 		</script>
 		<!-- ================= End cart page ====================== -->

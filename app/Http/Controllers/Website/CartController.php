@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Wishlist;
 use Carbon\Carbon;
 use Auth;
+use Session;
 
 class CartController extends Controller{
     //store cart
@@ -108,5 +109,11 @@ class CartController extends Controller{
             'cartQty' => $cartQty,
             'cartTotal' => round($cartTotal),
         ));
+    }
+
+    //cart remove product
+    public function destory($rowId){
+        Cart::remove($rowId);
+        return response()->json(['success' => 'Product Remove From Cart']);
     }
 }
