@@ -907,6 +907,14 @@
 					data: { coupon_name:coupon_name},
 					url: "{{ url('/coupon-apply') }}",
 					success:function(data){
+						couponCalculation();
+
+						// $('#couponField').css("display","none");
+						// $('#couponField').hide();
+						
+						if (data.validity == true) {
+							$('#couponField').hide();
+						}
 						
 						//  start sweet alert message
 						const Toast = Swal.mixin({
@@ -962,7 +970,7 @@
 										</div>
 										<div class="cart-sub-total">
 											Coupon = <span class="inner-left-md">${data.coupon_name} </span>
-											<button type="submit"><i class="fa fa-times"></i></button>
+											<button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i></button>
 										</div>
 										<div class="cart-sub-total">
 											Discount Amount = <span class="inner-left-md">$${data.discount_amount}</span>
@@ -979,6 +987,46 @@
 			}
 			couponCalculation();
 			//coupon calculation end
+
+			//remove coupon start
+			function couponRemove(){
+				$.ajax({
+					type:'GET',
+					url: "{{ url('/coupon-remove') }}",
+					dataType:'json',
+					success:function(data){
+
+						$('#couponField').show();
+						// $('#couponField').css("display","");
+						
+						$('#coupon_name').val('');
+						//  start message
+
+						couponCalculation();
+
+						//  start sweet alert message
+						const Toast = Swal.mixin({
+							toast: true,
+							position: 'top-end',
+							showConfirmButton: false,
+							timer: 3000
+						})
+						if($.isEmptyObject(data.error)){
+							Toast.fire({
+							type: 'success',
+							title: data.success
+							})
+						}else{
+							Toast.fire({
+								type: 'error',
+								title: data.error
+							})
+						}
+						//  end sweet alert message
+					}
+				});
+			}
+			//remove coupon end
 
 		</script>
 		<!-- ===================== Coupon Page End =============== -->

@@ -158,7 +158,7 @@ class CartController extends Controller{
             return response()->json(['error' => 'Invalid Coupon']);
         }
     }
-    
+
     //coupon calculation
     public function couponCalcaultion(){
         if (Session::has('coupon')) {
@@ -174,5 +174,11 @@ class CartController extends Controller{
                 'total' => Cart::total(),
             ));
         }
+    }
+    
+    //remove coupon
+    public function removeCoupon(){
+        Session::forget('coupon');
+        return response()->json(['success' => 'Coupon Remove Success']);
     }
 }

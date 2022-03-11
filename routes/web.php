@@ -194,3 +194,4 @@ route::get('/cart-decrement/{rowId}',[CartController::class,'cartDecrement'])->n
 //coupon
 route::post('/coupon-apply',[CartController::class,'couponApply'])->name('couponApply');
 route::get('/coupon-calculation',[CartController::class,'couponCalcaultion'])->name('couponCalcaultion');
+route::get('/coupon-remove',[CartController::class,'removeCoupon'])->name('removeCoupon');
