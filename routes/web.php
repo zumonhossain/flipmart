@@ -190,3 +190,7 @@ route::get('/get-cart-product',[CartController::class,'getAllCart'])->name('getA
 route::get('/cart-remove/{rowId}',[CartController::class,'destory'])->name('destory');
 route::get('/cart-increment/{rowId}',[CartController::class,'cartIncrement'])->name('cartIncrement');
 route::get('/cart-decrement/{rowId}',[CartController::class,'cartDecrement'])->name('cartDecrement');
+
+//coupon
+route::post('/coupon-apply',[CartController::class,'couponApply'])->name('couponApply');
+route::get('/coupon-calculation',[CartController::class,'couponCalcaultion'])->name('couponCalcaultion');
