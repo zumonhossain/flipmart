@@ -837,6 +837,10 @@
 
 						cart();
 						miniCart();
+						couponCalculation();
+						
+						$('#coupon_name').val('');
+						$('#couponField').show();
 
 						//  start sweet alert message
 						const Toast = Swal.mixin({
@@ -864,12 +868,13 @@
 			// cart remove end
 
 			// cart increment start
-			function cartIncrement(rowId){
+			function cartIncrement(rowId) {
 				$.ajax({
-					type:'GET',
-					url: "{{ url('/cart-increment/') }}/"+rowId,
-					dataType:'json',
-					success:function(data){
+					type: 'GET',
+					url: "{{ url('/cart-increment/') }}/" + rowId,
+					dataType: 'json',
+					success: function(data) {
+						couponCalculation();
 						cart();
 						miniCart();
 					}
@@ -878,12 +883,13 @@
 			// cart increment end
 
 			// cart deccrement start
-			function cartDecrement(rowId){
+			function cartDecrement(rowId) {
 				$.ajax({
-					type:'GET',
-					url: "{{ url('/cart-decrement/') }}/"+rowId,
-					dataType:'json',
-					success:function(data){
+					type: 'GET',
+					url: "{{ url('/cart-decrement/') }}/" + rowId,
+					dataType: 'json',
+					success: function(data) {
+						couponCalculation();
 						cart();
 						miniCart();
 					}
