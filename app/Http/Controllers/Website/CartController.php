@@ -8,6 +8,7 @@ use Cart;
 use App\Models\Product;
 use App\Models\Wishlist;
 use App\Models\Coupon;
+use App\Models\ShipDivision;
 use Carbon\Carbon;
 use Auth;
 use Session;
@@ -216,5 +217,30 @@ class CartController extends Controller{
     public function removeCoupon(){
         Session::forget('coupon');
         return response()->json(['success' => 'Coupon Remove Success']);
+    }
+
+    //checkout
+    public function checkoutCreate(){
+        if (Auth::check()) {
+            if (Cart::total() > 0) {
+                $carts = Cart::content();
+                $cartQty = Cart::count();
+                $cartTotal = Cart::total();
+                $divisions = ShipDivision::orderBy('division_name','ASC')->get();
+                return view('website.checkout',compact('carts','cartQty','cartTotal','divisions'));
+           }else {
+            $notification=array(
+                'message'=>'Shopping Now',
+                'alert-type'=>'error'
+            );
+            return Redirect()->to('/')->with($notification);
+           }
+        }else {
+            $notification=array(
+                'message'=>'You Nedd to Login First',
+                'alert-type'=>'error'
+            );
+            return Redirect()->route('login')->with($notification);
+        }
     }
 }
