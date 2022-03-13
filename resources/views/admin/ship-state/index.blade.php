@@ -123,7 +123,9 @@
                         type:"GET",
                         dataType:"json",
                         success:function(data) {
-                        var d =$('select[name="district_id"]').empty();
+
+                            $('select[name="district_id"]').empty();
+                            
                             $.each(data, function(key, value){
                                 $('select[name="district_id"]').append('<option value="'+ value.id +'">' + value.district_name + '</option>');
                             });

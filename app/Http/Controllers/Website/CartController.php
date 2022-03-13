@@ -227,7 +227,7 @@ class CartController extends Controller{
                 $cartQty = Cart::count();
                 $cartTotal = Cart::total();
                 $divisions = ShipDivision::orderBy('division_name','ASC')->get();
-                return view('website.checkout',compact('carts','cartQty','cartTotal','divisions'));
+                return view('user.checkout',compact('carts','cartQty','cartTotal','divisions'));
            }else {
             $notification=array(
                 'message'=>'Shopping Now',

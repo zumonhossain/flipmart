@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
@@ -156,10 +158,13 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     route::get('/wishlist-remove/{id}',[WishlistController::class,'destory'])->name('destory');
 
 
+    //checkout
+    route::get('district/ajax/{division_id}',[CheckoutController::class,'getDistrictWithAjax'])->name('getDistrictWithAjax');
+    route::get('state-get/ajax/{district_id}',[CheckoutController::class,'getStateWithAjax'])->name('getStateWithAjax');
+    route::post('payment',[CheckoutController::class,'storeCheckout'])->name('user.checkout.store');
 
-
-
-
+    //stripe payment
+    route::post('stripe/order-complete',[StripeController::class,'store'])->name('stripe.order');
 
 });
 
@@ -198,3 +203,4 @@ route::get('/coupon-remove',[CartController::class,'removeCoupon'])->name('remov
 
 //checkout
 route::get('user/checkout',[CartController::class,'checkoutCreate'])->name('checkout');
+
