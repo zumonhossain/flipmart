@@ -34,12 +34,20 @@ class CheckoutController extends Controller{
         
         $cartTotal = Cart::total();
 
+        $carts = Cart::content();
+
+        if (Session::has('coupon')) {
+            $total_amount = Session::get('coupon')['total_amount'];
+        }else {
+            $total_amount = round(Cart::total());
+        }
+
         if ($request->payment_method == 'stripe') {
             return view('website.payment.stripe',compact('data','cartTotal'));
         }elseif ($request->payment_method == 'sslHost') {
-            return view('website.payment.hostedPayment',compact('data'));
+            return view('website.payment.hostedPayment',compact('data','total_amount','carts'));
         }elseif ($request->payment_method == 'sslEasy') {
-            return view('website.payment.easyPayment',compact('data'));
+            return view('website.payment.easyPayment',compact('data','total_amount','carts'));
         }else
         {
             return 'handcash';

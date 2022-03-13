@@ -32,22 +32,22 @@
                                         <div class="col-md-6 col-sm-6 already-registered-login">
                                             <h4 class="checkout-subtitle">Shipping Address?</h4>
                                                 <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">Name <span>*</span></label>
+                                                    <label class="info-title" for="exampleInputEmail1">Name <span style="color:red">*</span></label>
                                                     <input type="text" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="full name" name="shipping_name" value="{{ Auth::user()->name }}" data-validation="required">
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">Email <span>*</span></label>
+                                                    <label class="info-title" for="exampleInputEmail1">Email <span style="color:red">*</span></label>
                                                     <input type="text" class="form-control unicase-form-control text-input" name="shipping_email" id="exampleInputEmail1" placeholder="full name" value="{{ Auth::user()->email }}" data-validation="required">
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">Phone <span>*</span></label>
+                                                    <label class="info-title" for="exampleInputEmail1">Phone <span style="color:red">*</span></label>
                                                     <input type="text" class="form-control unicase-form-control text-input" name="shipping_phone" id="exampleInputEmail1" placeholder="full name" value="{{ Auth::user()->phone }}" data-validation="required">
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">Post Code <span>*</span></label>
+                                                    <label class="info-title" for="exampleInputEmail1">Post Code <span style="color:red">*</span></label>
                                                     <input type="text" class="form-control unicase-form-control text-input" name="post_code" id="exampleInputEmail1" placeholder="post code" data-validation="required">
                                                 </div>
 
@@ -57,7 +57,7 @@
 
                                         <div class="col-md-6 col-sm-6 already-registered-login">
                                             <div class="form-group">
-                                                <label class="form-control-label">Select Division: <span class="tx-danger">*</span></label>
+                                                <label class="form-control-label">Select Division: <span style="color:red">*</span></label>
                                                 <select class="form-control select2-show-search" data-placeholder="Select One" name="division_id" data-validation="required">
                                                 <option label="Choose one"></option>
                                                 @foreach ($divisions as $item)
@@ -69,7 +69,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-control-label">Select District: <span class="tx-danger">*</span></label>
+                                                <label class="form-control-label">Select District: <span style="color:red">*</span></label>
                                                 <select class="form-control select2-show-search" data-placeholder="Select One" name="district_id" data-validation="required">
                                                 <option label="Choose one"></option>
                                                 </select>
@@ -79,7 +79,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="form-control-label">Select State: <span class="tx-danger">*</span></label>
+                                                <label class="form-control-label">Select State: <span style="color:red">*</span></label>
                                                 <select class="form-control select2-show-search" data-placeholder="Select One" name="state_id" data-validation="required">
                                                 <option label="Choose one"></option>
                                                 </select>
@@ -89,7 +89,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="info-title" for="exampleInputEmail1">Notes <span>*</span></label>
+                                                <label class="info-title" for="exampleInputEmail1">Notes <span style="color:red">*</span></label>
                                                 <textarea name="notes" class="form-control" id="" cols="30" rows="5" placeholder="notes" data-validation="required"></textarea>
                                             </div>
                                         </div>
@@ -158,6 +158,7 @@
                                                 <input type="radio" name="payment_method" value="stripe">
                                                 <label for="">Stripe</label>
                                             </li>
+                                            
                                             <li>
                                                 <input type="radio" name="payment_method" value="sslHost">
                                                 <label for="">SSL HostedPayment</label>

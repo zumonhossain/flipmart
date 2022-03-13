@@ -1,6 +1,17 @@
 @extends('layouts.website')
 @section('content')
 @section('title') Checkout @endsection
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <ul class="list-inline list-unstyled">
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li class='active'>Stripe Payment</li>
+                </ul>
+            </div><!-- /.breadcrumb-inner -->
+        </div><!-- /.container -->
+    </div><!-- /.breadcrumb -->
+
     <style>
           /**
       * The CSS shown here will not be introduced in the Quickstart guide, but shows
@@ -27,22 +38,9 @@
         background-color: #fefde5 !important;
       }
     </style>
-
-    <div class="breadcrumb">
-        <div class="container">
-            <div class="breadcrumb-inner">
-                <ul class="list-inline list-unstyled">
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li class='active'>Stripe Payment</li>
-                </ul>
-            </div><!-- /.breadcrumb-inner -->
-        </div><!-- /.container -->
-    </div><!-- /.breadcrumb -->
-
-
     <div class="body-content">
         <div class="container">
-            <div class="checkout-box ">
+            <div class="checkout-box">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="checkout-progress-sidebar ">
