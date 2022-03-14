@@ -428,6 +428,7 @@
 		<script src="{{ asset('contents/website') }}/assets/js/bootstrap-select.min.js"></script>
 		<script src="{{ asset('contents/website') }}/assets/js/wow.min.js"></script>
 		<script src="{{ asset('contents/website') }}/assets/js/scripts.js"></script>
+
 		<script src="{{ asset('contents/website') }}/assets/js/custom.js"></script>
 
 		

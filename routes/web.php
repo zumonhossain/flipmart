@@ -167,10 +167,14 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     //stripe payment
     route::post('stripe/order-complete',[StripeController::class,'store'])->name('stripe.order');
 
+    //user orders
+    Route::get('orders',[UserController::class,'orderCreate'])->name('my-orders');
+    Route::get('order-view/{order_id}',[UserController::class,'orderView']);
+
 });
 
+// SSLCOMMERZ Start
 Route::group(['middleware'=>['user','auth']], function(){
-    // SSLCOMMERZ Start
     Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
     Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
 
@@ -182,9 +186,9 @@ Route::group(['middleware'=>['user','auth']], function(){
     Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
     Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
-    //SSLCOMMERZ END
-
 });
+//SSLCOMMERZ END
+
 
 // ================= Website Routes ======================
 // Website Route Start
