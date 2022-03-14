@@ -170,6 +170,7 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     //user orders
     Route::get('orders',[UserController::class,'orderCreate'])->name('my-orders');
     Route::get('order-view/{order_id}',[UserController::class,'orderView']);
+    Route::get('invoice-download/{order_id}',[UserController::class,'invoiceDownload']);
 
 });
 

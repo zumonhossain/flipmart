@@ -10,8 +10,9 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use Carbon\Carbon;
 use Session;
-use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
+use PDF;
+use Auth;
+use Image;
 
 
 class UserController extends Controller{
@@ -147,5 +148,17 @@ class UserController extends Controller{
         $order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
         $orderItems = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
         return view('user.order.view-order',compact('order','orderItems'));
+    }
+
+    //invoice download
+    public function invoiceDownload($order_id){
+        $order = Order::with('division','district','state','user')->where('id',$order_id)->where('user_id',Auth::id())->first();
+        $orderItems = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
+        // return view('user.order.invoice',compact('order','orderItems'));
+        $pdf = PDF::loadView('user.order.invoice',compact('order','orderItems'))->setPaper('a4')->setOptions([
+            'tempDir' => public_path(),
+            'chroot' => public_path(),
+        ]);
+        return $pdf->download('invoice.pdf');
     }
 }
