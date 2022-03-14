@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Mail\orderMail;
 use Carbon\Carbon;
 use Session;
 use Cart;
+use Mail;
 use Auth;
 
 class StripeController extends Controller{
@@ -55,6 +57,19 @@ class StripeController extends Controller{
             'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);
+
+        //start send email
+
+        $invoice = Order::findOrFail($order_id);
+
+        $data = [
+            'invoice_no' => $invoice->invoice_no,
+            'amount' => $total_amount,
+        ];
+
+        Mail::to($request->email)->send(new orderMail($data));
+
+        //end send email
 
 
         $carts = Cart::content();
