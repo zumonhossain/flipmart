@@ -21,7 +21,7 @@
                     <div class="col-md-3 ">
                     @include('user.includes.profile-sidebar')
                     </div>
-                    <div class="col-md-9 mt-2" style="border:1px solid #ddd;padding-top:15px;">
+                    <div class="col-md-9 mt-2">
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="list-group">
@@ -143,7 +143,7 @@
                                                             <strong>{{ $item->qty }}</strong>
                                                         </td>
                                                         <td class="col-md-1">
-                                                            <strong>৳{{ $item->price }} ({{ $item->price * $item->qty }})</strong>
+                                                            <strong>${{ $item->price }}</strong>
                                                         </td>
                                                     </tr>
                                                 @endforeach

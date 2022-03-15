@@ -192,6 +192,10 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::get('order-view/{order_id}',[UserController::class,'orderView']);
     Route::get('invoice-download/{order_id}',[UserController::class,'invoiceDownload']);
 
+    //return orders
+    Route::post('return/orders-submit',[UserController::class,'returnOrderSubmit'])->name('user-return-order');
+    Route::get('return/orders',[UserController::class,'returnOrder'])->name('return-orders');
+
 });
 
 // SSLCOMMERZ Start

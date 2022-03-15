@@ -137,7 +137,7 @@
                                             <strong>{{ $item->qty }}</strong>
                                         </td>
                                         <td class="col-md-1">
-                                            <strong>৳{{ $item->price }} ({{ $item->price * $item->qty }})</strong>
+                                            <strong>${{ $item->price }}</strong>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -161,4 +161,24 @@ class UserController extends Controller{
         ]);
         return $pdf->download('invoice.pdf');
     }
+
+    ///return orders submit
+    public function returnOrderSubmit(Request $request){
+        $id = $request->id;
+        Order::findOrFail($id)->update([
+            'return_date' => Carbon::now()->format('d F Y'),
+            'return_reason' => $request->return_reason,
+        ]);
+        $notification=array(
+            'messege'=>'Return Request Send Success',
+            'alert-type'=>'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
+
+    //return order show
+    public function returnOrder(){
+        $orders = Order::where('user_id',Auth::id())->where('return_reason','!=',NULL)->orderBy('id','DESC')->get();
+        return view('user.order.return-order',compact('orders'));
+    }
 }

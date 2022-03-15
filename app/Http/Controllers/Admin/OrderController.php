@@ -90,7 +90,6 @@ class OrderController extends Controller{
         Order::findOrFail($order_id)->update([
             'status' => 'Processing',
             'processing_date' => Carbon::now()
-            
         ]);
         
         $notification=array(
