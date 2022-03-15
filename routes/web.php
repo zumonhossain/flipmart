@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\SslCommerzPaymentController;
@@ -139,6 +140,25 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     route::post('coupon/update',[CouponController::class,'update'])->name('coupon.update');
     route::post('coupon/softdelete',[CouponController::class,'softdelete'])->name('coupon.softdelete');
 
+    //orders
+    Route::get('pending-orders',[OrderController::class,'pendingOrder'])->name('pending-orders');
+    Route::get('orders-view/{id}',[OrderController::class,'viewOrders']);
+    Route::get('confirmed-orders',[OrderController::class,'confirmOrder'])->name('confirmed-orders');
+    Route::get('processing-orders',[OrderController::class,'processingOrder'])->name('processing-orders');
+    Route::get('picked-orders',[OrderController::class,'pickedOrders'])->name('picked-orders');
+    Route::get('shipped-orders',[OrderController::class,'shippedOrders'])->name('shipped-orders');
+    Route::get('delivered-orders',[OrderController::class,'deliveredOrders'])->name('delivered-orders');
+    Route::get('cancel-orders',[OrderController::class,'cancelOrders'])->name('order-cancel');
+
+    //status
+    Route::get('pending-to-confirm/{order_id}',[OrderController::class,'pendingToConfirm']);
+    Route::get('pending-to-cancel/{order_id}',[OrderController::class,'pendingToCancel']);
+    Route::get('confirm-to-processing/{order_id}',[OrderController::class,'confirmToProcess']);
+    Route::get('processing-to-picked/{order_id}',[OrderController::class,'processToPicked']);
+    Route::get('picked-to-shipped/{order_id}',[OrderController::class,'pickedToShipped']);
+    Route::get('shipped-to-delivery/{order_id}',[OrderController::class,'shippedToDelivery']);
+    //invoice download
+    Route::get('invoice-download/{order_id}',[OrderController::class,'downloadInvoice']);
 
 });
 

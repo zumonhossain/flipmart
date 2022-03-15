@@ -233,6 +233,18 @@
                         <li> 
                             <a class="waves-effect waves-dark" href="{{ url('admin/coupon') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Coupon</span></a>
                         </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Order</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{ route('pending-orders') }}">Pending Order</a></li>
+                                <li><a href="{{ route('confirmed-orders') }}">Confirmed Order</a></li>
+                                <li><a href="{{ route('processing-orders') }}">Processing Order</a></li>
+                                <li><a href="{{ route('picked-orders') }}">Picked Order</a></li>
+                                <li><a href="{{ route('shipped-orders') }}">Shipped Order</a></li>
+                                <li><a href="{{ route('delivered-orders') }}">Delivered Order</a></li>
+                                <li><a href="{{ route('order-cancel') }}">Cancel Order</a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a class="waves-effect waves-dark" href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="mdi mdi-power"></i><span class="hide-menu">Logout</span></a>
                         </li>
@@ -336,6 +348,11 @@
             }
         @endif
     </script>
+
+    <!-- sweetalert -->
+    <script src="{{ asset('contents/admin') }}/js/sweetalert/sweetalert.min.js"></script>
+    <script src="{{ asset('contents/admin') }}/js/sweetalert/code.js"></script>
+
 </body>
 
 </html>
