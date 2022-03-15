@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\SslCommerzPaymentController;
@@ -159,6 +160,12 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     Route::get('shipped-to-delivery/{order_id}',[OrderController::class,'shippedToDelivery']);
     //invoice download
     Route::get('invoice-download/{order_id}',[OrderController::class,'downloadInvoice']);
+
+    //reports
+    Route::get('reports',[ReportController::class,'index'])->name('reports');
+    Route::post('reports/by-date',[ReportController::class,'reportByDate'])->name('search-by-date');
+    Route::post('reports/by-month',[ReportController::class,'reportByMonth'])->name('search-by-month');
+    Route::post('reports/by-year',[ReportController::class,'reportByYear'])->name('search-by-year');
 
 });
 
