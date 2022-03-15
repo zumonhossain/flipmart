@@ -181,4 +181,10 @@ class UserController extends Controller{
         $orders = Order::where('user_id',Auth::id())->where('return_reason','!=',NULL)->orderBy('id','DESC')->get();
         return view('user.order.return-order',compact('orders'));
     }
+
+    //cancel order show
+    public function cancelOrder(){
+        $orders = Order::where('user_id',Auth::id())->where('status','Cancel')->orderBy('id','DESC')->get();
+        return view('user.order.cancel-order',compact('orders'));
+    }
 }

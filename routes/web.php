@@ -195,6 +195,7 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     //return orders
     Route::post('return/orders-submit',[UserController::class,'returnOrderSubmit'])->name('user-return-order');
     Route::get('return/orders',[UserController::class,'returnOrder'])->name('return-orders');
+    Route::get('cancel/orders',[UserController::class,'cancelOrder'])->name('cancel-orders');
 
 });
 

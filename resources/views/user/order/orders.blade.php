@@ -1,6 +1,6 @@
 @extends('layouts.website')
 @section('title')
-    All Order
+    Return Order
 @endsection
 @section('content')
     <div class="breadcrumb">
@@ -22,17 +22,17 @@
                         @include('user.includes.profile-sidebar')
                     </div>
                     <div class="col-md-9 mt-2">
-                        <div class="table table-bordered table-striped table-hover custom_table">
-                            <table>
+                        <div class="table-responsive">
+                            <table class="table">
                                 <tbody>
-                                    <tr style="background: #E9EBEC;margin-bottom:50px;display:block;padding:10px;color:green;">
-                                        <td class="col-md-2">
+                                    <tr style="background: #E9EBEC;">
+                                        <td class="col-md-1">
                                             <label for="">Date</label>
                                         </td>
-                                        <td class="col-md-2">
+                                        <td class="col-md-3">
                                             <label for="">Total</label>
                                         </td>
-                                        <td class="col-md-3">
+                                        <td class="col-md-2">
                                             <label for="">Payment</label>
                                         </td>
                                         <td class="col-md-2">
@@ -46,21 +46,21 @@
                                         </td>
                                     </tr>
                                     @foreach ($orders as $order)
-                                        <tr style="margin-bottom:50px;display:block;">
-                                            <td class="col-md-2">
+                                        <tr>
+                                            <td class="col-md-1">
                                                 <strong>{{ $order->order_date }}</strong>
                                             </td>
-                                            <td class="col-md-2">
-                                                <strong>${{ $order->amount }}</strong>
-                                            </td>
                                             <td class="col-md-3">
+                                                <strong>৳{{ $order->amount }}</strong>
+                                            </td>
+                                            <td class="col-md-2">
                                                 <strong>{{ $order->payment_method }}</strong>
                                             </td>
                                             <td class="col-md-2">
                                                 <strong>{{ $order->invoice_no }}</strong>
                                             </td>
                                             <td class="col-md-2">
-                                                <span class="badge badge-pill badge-warning" style="background: #418DB9; text:white;">{{ ucwords($order->status) }}</span>
+                                                <span class="badge badge-pill badge-warning" style="background: #418DB9; text:white;">{{ ucwords($order->status) }}</span> <br>
                                             </td>
                                             <td class="col-md-1">
                                                 <a href="{{ url('user/order-view/'.$order->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>

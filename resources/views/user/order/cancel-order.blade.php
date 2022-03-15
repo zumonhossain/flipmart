@@ -19,7 +19,7 @@
             <div class="sign-in-page">
                 <div class="row">
                     <div class="col-md-3 ">
-                        @include('user.includes.sidebar')
+                        @include('user.includes.profile-sidebar')
                     </div>
                     <div class="col-md-9 mt-2">
                         <div class="table-responsive">
