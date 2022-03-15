@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -258,5 +259,20 @@ route::get('/coupon-remove',[CartController::class,'removeCoupon'])->name('remov
 
 //checkout
 route::get('user/checkout',[CartController::class,'checkoutCreate'])->name('checkout');
+
+
+
+
+// ====================================== LARAVEL SOCIATLITE Routes =====================================
+
+//login google
+Route::get('login/google',[LoginController::class,'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback',[LoginController::class,'handleGoogleCallback']);
+
+//facebook
+Route::get('login/facebook',[LoginController::class,'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback',[LoginController::class,'handleFacebookCallback']);
+
+
 
 

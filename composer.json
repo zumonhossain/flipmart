@@ -13,6 +13,7 @@
         "intervention/image": "^2.7",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "stripe/stripe-php": "^7.116"
