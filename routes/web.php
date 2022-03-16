@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
+use App\Http\Controllers\Website\TrackingController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -272,6 +273,16 @@ Route::get('login/google/callback',[LoginController::class,'handleGoogleCallback
 //facebook
 Route::get('login/facebook',[LoginController::class,'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback',[LoginController::class,'handleFacebookCallback']);
+
+//Order Track
+Route::post('order/track', [TrackingController::class,'orderTrackNow'])->name('order.track');
+
+
+
+
+
+
+
 
 
 
