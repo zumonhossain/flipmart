@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\TrackingController;
+use App\Http\Controllers\Website\SearchController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -276,6 +277,11 @@ Route::get('login/facebook/callback',[LoginController::class,'handleFacebookCall
 
 //Order Track
 Route::post('order/track', [TrackingController::class,'orderTrackNow'])->name('order.track');
+
+
+ //search product
+ Route::get('/search-products',[SearchController::class,'searchProduct'])->name('search.product');
+ Route::post('/find-products',[SearchController::class,'findProducts']);
 
 
 

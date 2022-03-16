@@ -10,7 +10,7 @@
 	    <meta name="robots" content="all">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	    <title>Flipmart</title>
+	    <title>@yield('title')</title>
 	    <link rel="stylesheet" href="{{ asset('contents/website') }}/assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="{{ asset('contents/website') }}/assets/css/main.css">
 	    <link rel="stylesheet" href="{{ asset('contents/website') }}/assets/css/blue.css">
@@ -27,6 +27,24 @@
 
 		<script src="https://js.stripe.com/v3/"></script>
 		
+		<style>
+			.search-area {
+				position: relative;
+			}
+
+			#suggestProduct {
+				position: absolute;
+				top: 100%;
+				left: 0;
+				width: 100%;
+				background: #fff;
+				z-index: 999;
+				border-radius: 4px;
+				margin-top: 2px;
+			}
+
+		</style>
+
 	</head>
     <body class="cnt-home">
 		<!-- ================== HEADER ================ -->
@@ -111,7 +129,7 @@
 						<div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
 							<!-- ============= SEARCH AREA =================== -->
 							<div class="search-area">
-								<form>
+								<form action="{{ route('search.product') }}" method="GET">
 									<div class="control-group">
 										<ul class="categories-filter animate-dropdown">
 											<li class="dropdown">
@@ -127,10 +145,13 @@
 												</ul>
 											</li>
 										</ul>
-										<input class="search-field" placeholder="Search here..." />
-										<a class="search-button" href="#" ></a>    
+										<input name="search" id="search" onfocus="showSearchResult()" onblur="hideSearchResult()" class="search-field" placeholder="Search here..." />
+										<button class="search-button" href="#" ></button>    
 									</div>
 								</form>
+
+								<div id="suggestProduct"></div>
+
 							</div>
 							<!-- ========== SEARCH AREA : END ================ -->				
 						</div>
@@ -1106,5 +1127,36 @@
 		</script>
 		<!-- ================= SSLCommerz Payment Method Default Script End =============== -->
 
+		<!-- ================= Search Start =============== -->
+		<script>
+			$("body").on("keyup", "#search", function() {
+				let searchData = $("#search").val();
+				if (searchData.length > 0) {
+					$.ajax({
+						type: 'POST',
+						url: "{{ url('/find-products') }}",
+						data: {
+							search: searchData
+						},
+						success: function(result) {
+							$('#suggestProduct').html(result)
+						}
+					});
+				}
+
+				if (searchData.length < 1) $('#suggestProduct').html("");
+			})
+    	</script>
+
+		<script>
+			function showSearchResult() {
+				$('#suggestProduct').slideDown();
+			}
+
+			function hideSearchResult() {
+				$('#suggestProduct').slideUp();
+			}
+    	</script>
+		<!-- ================= Search End =============== -->
 	</body>
 </html>

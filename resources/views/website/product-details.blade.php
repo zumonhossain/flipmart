@@ -1,6 +1,6 @@
 @extends('layouts.website')
 @section('title')
-    Single Product
+    {{ $product->product_name }}
 @endsection 
 @section('content')
     <div class="breadcrumb">
