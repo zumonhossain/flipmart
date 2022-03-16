@@ -415,7 +415,7 @@
                                                 <div class="aside"style="height: 50px; width:50px;" ><img src="{{ asset($item->product->product_thambnail) }}"></div>
                                                 <figcaption class="info align-self-center">
                                                     <p class="title"> 
-                                                        {{ $item->product->product_name_en  }}  <br>
+                                                        {{ $item->product->product_name  }}  <br>
                                                         {{ $item->size }} <br> 
                                                         {{ $item->color }}
                                                     </p> 

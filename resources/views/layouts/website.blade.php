@@ -1105,6 +1105,6 @@
 			})(window, document);
 		</script>
 		<!-- ================= SSLCommerz Payment Method Default Script End =============== -->
-		
+
 	</body>
 </html>

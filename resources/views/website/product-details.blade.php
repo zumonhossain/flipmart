@@ -306,6 +306,11 @@
                                                             </div><!-- /.action -->
 
                                                         </form><!-- /.cnt-form -->
+
+                                                        <!-- ========= Facebook Comments Start =========== -->
+                                                            <div class="fb-comments" data-href="{{ Request::url() }}" data-width="" data-numposts="10"></div>
+                                                        <!-- ========= Facebook Comments Start =========== -->
+
                                                     </div><!-- /.form-container -->
                                                 </div><!-- /.review-form -->
 
@@ -356,4 +361,12 @@
         </div><!-- /.container -->
     </div><!-- /.body-content -->
 
+
+    
+    <!-- ========= Facebook Comments Start =========== -->
+    <div id="fb-root"></div>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="ZZuNAuS0"></script>
+    <!-- ========= Facebook Comments End =========== -->
+	
 @endsection
