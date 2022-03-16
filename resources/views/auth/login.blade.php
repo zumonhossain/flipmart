@@ -26,7 +26,7 @@
                         <h4 class="">Sign in</h4>
                         <p class="">Hello, Welcome to your account.</p>
                         <div class="social-sign-in outer-top-xs">
-                            <a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
+                            <a href="{{ route('login.facebook') }}" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
                             <a href="{{ route('login.google') }}" class="twitter-sign-in"><i class="fa fa-google"></i> Sign In with Google</a>
                         </div>
                         <form action="{{ route('login') }}" method="POST"  class="register-form outer-top-xs" role="form">
