@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\CustomerReviewController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\TrackingController;
@@ -170,6 +171,11 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     Route::post('reports/by-date',[ReportController::class,'reportByDate'])->name('search-by-date');
     Route::post('reports/by-month',[ReportController::class,'reportByMonth'])->name('search-by-month');
     Route::post('reports/by-year',[ReportController::class,'reportByYear'])->name('search-by-year');
+
+    //customer review
+    Route::get('review-create',[CustomerReviewController::class,'create'])->name('customer.review');
+    Route::get('review-delete/{review_id}',[CustomerReviewController::class,'destroy']);
+    Route::get('review-approve/{review_id}',[CustomerReviewController::class,'approveNow']);
 
 });
 

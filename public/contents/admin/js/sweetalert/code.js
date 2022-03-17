@@ -159,6 +159,29 @@ $(document).on("click", "#delete", function(e){
     });
 });
 
+// Approve
+$(document).on("click", "#approve", function(e){
+    e.preventDefault();
+    var link = $(this).attr("href");
+
+    swal({
+        title: "Are you sure To Approve?",
+        text: "Once Approve, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            window.location.href = link;
+
+        } else {
+            swal("Your imaginary file is safe!");
+        }
+
+    });
+});
+
 
 
 

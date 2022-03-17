@@ -2,6 +2,15 @@
 @section('title')
     {{ $product->product_name }}
 @endsection 
+
+@section('meta')
+    <meta property="og:title" content="{{ $product->product_name }}" />
+    <meta property="og:url" content="{{ Request::fullUrl() }}" />
+    <meta property="og:image" content="{{ URL::to($product->product_thambnail) }}" />
+    <meta property="og:description" content="{{ $product->short_description }}" />
+    <meta property="og:site_name" content="Flipmart" />
+@endsection
+
 @section('content')
     <div class="breadcrumb">
         <div class="container">
@@ -9,7 +18,7 @@
                 <ul class="list-inline list-unstyled">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Clothing</a></li>
-                    <li class='active'>Floral Print Buttoned</li>
+                    <li class='active'>Product Details</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
         </div><!-- /.container -->
@@ -127,15 +136,9 @@
 
                                             <div class="col-sm-6">
                                                 <div class="favorite-button m-t-10">
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" href="#">
-                                                        <i class="fa fa-heart"></i>
-                                                    </a>
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" href="#">
-                                                    <i class="fa fa-signal"></i>
-                                                    </a>
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" href="#">
-                                                        <i class="fa fa-envelope"></i>
-                                                    </a>
+                                               <!-- =========== Product Share Start =========== -->
+                                                    <div class="sharethis-inline-share-buttons" data-href="{{ Request::url() }}"></div>
+                                                <!-- =========== Product Share End =========== -->
                                                 </div>
                                             </div>
 
@@ -208,6 +211,7 @@
                                 <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                     <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
                                     <li><a data-toggle="tab" href="#review">REVIEW</a></li>
+                                    <li><a data-toggle="tab" href="#tags">Comments</a></li>
                                 </ul><!-- /.nav-tabs #product-tabs -->
                             </div>
                             <div class="col-sm-9">
@@ -244,6 +248,17 @@
                                             @endforeach
                                         </div><!-- /.product-tab -->
                                     </div><!-- /.tab-pane -->
+
+                                    <div id="tags" class="tab-pane">
+                                        <div class="product-tag">
+
+                                            <!-- ========= Facebook Comments Start =========== -->
+                                                <div class="fb-comments" data-href="{{ Request::url() }}" data-numposts="10"></div>
+                                            <!-- ========= Facebook Comments Start =========== -->
+
+                                        </div><!-- /.product-tab -->
+                                    </div><!-- /.tab-pane -->
+
                                 </div><!-- /.tab-content -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
@@ -271,5 +286,10 @@
 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="ZZuNAuS0"></script>
     <!-- ========= Facebook Comments End =========== -->
+
+
+    <!-- ========= Social Media Share Start =========== -->
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=6233708cf1b1a00019ad9d90&product=inline-share-buttons" data-href="{{ Request::url() }}" async="async"></script>
+    <!-- ========= Social Media Share End =========== -->
 	
 @endsection

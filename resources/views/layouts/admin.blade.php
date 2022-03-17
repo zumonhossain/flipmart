@@ -248,6 +248,9 @@
                         <li> 
                             <a class="waves-effect waves-dark" href="{{ route('reports') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Reports</span></a>
                         </li>
+                        <li> 
+                            <a class="waves-effect waves-dark" href="{{ route('customer.review') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Review</span></a>
+                        </li>
                         <li>
                             <a class="waves-effect waves-dark" href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="mdi mdi-power"></i><span class="hide-menu">Logout</span></a>
                         </li>
