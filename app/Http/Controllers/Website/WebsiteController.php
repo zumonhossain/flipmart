@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
+use App\Models\Brand;
 use App\Models\Product;
 use App\Models\MultiImg;
-use App\Models\Brand;
+use App\Models\ProductReview;
 
 class WebsiteController extends Controller{
     public function index(){
@@ -43,7 +44,12 @@ class WebsiteController extends Controller{
         $cat_id = $product->category_id;
         $relatedProducts = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
 
-        return view('website.product-details',compact('product','multiImgs','color','product_color','size','product_size','relatedProducts'));
+        //prouct review
+        $reviewProducts = ProductReview::with('user')->where('product_id',$id)->where('status','approve')->latest()->get();
+        $rating = ProductReview::where('product_id',$id)->where('status','approve')->avg('rating');
+        $avgRating = number_format($rating,1);
+
+        return view('website.product-details',compact('product','multiImgs','color','product_color','size','product_size','relatedProducts','reviewProducts','avgRating'));
     }
 
     //tag wise product

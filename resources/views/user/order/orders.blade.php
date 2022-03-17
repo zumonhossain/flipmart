@@ -51,7 +51,7 @@
                                                 <strong>{{ $order->order_date }}</strong>
                                             </td>
                                             <td class="col-md-3">
-                                                <strong>৳{{ $order->amount }}</strong>
+                                                <strong>${{ $order->amount }}</strong>
                                             </td>
                                             <td class="col-md-2">
                                                 <strong>{{ $order->payment_method }}</strong>

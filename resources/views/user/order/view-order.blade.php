@@ -100,7 +100,7 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
-                                                <tr style="background: #E9EBEC;">
+                                                <tr style="background: #E9EBEC;color:green;">
                                                     <td class="col-md-1">
                                                         <label for="">Image</label>
                                                     </td>
@@ -122,6 +122,11 @@
                                                     <td class="col-md-1">
                                                         <label for="">Price</label>
                                                     </td>
+                                                    @if ($order->status == 'Delivered')
+                                                        <td class="col-md-1">
+                                                            <label for="">Review</label>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                                 @foreach ($orderItems as $item)
                                                     <tr>
@@ -145,6 +150,11 @@
                                                         <td class="col-md-1">
                                                             <strong>${{ $item->price }}</strong>
                                                         </td>
+                                                        @if ($order->status == 'Delivered')
+                                                            <td class="col-md-1">
+                                                                <a href="{{ url('user/review-create/'.$item->product_id) }}"><strong style="text-decoration:underline;color:red">Review</strong></a>
+                                                            </td>
+                                                        @endif
                                                     </tr>
                                                 @endforeach
                                             </tbody>

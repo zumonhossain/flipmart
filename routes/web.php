@@ -5,6 +5,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
+use App\Http\Controllers\User\ProductReviewController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
@@ -207,6 +208,10 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::get('return/orders',[UserController::class,'returnOrder'])->name('return-orders');
     Route::get('cancel/orders',[UserController::class,'cancelOrder'])->name('cancel-orders');
 
+    //product review
+    Route::get('review-create/{product_id}',[ProductReviewController::class,'create']);
+    Route::post('store/review',[ProductReviewController::class,'store'])->name('store.review');
+
 });
 
 // SSLCOMMERZ Start
@@ -265,7 +270,7 @@ route::get('user/checkout',[CartController::class,'checkoutCreate'])->name('chec
 
 
 
-// ====================================== LARAVEL SOCIATLITE Routes =====================================
+// ====================================== LARAVEL SOCIATLITE START=====================================
 
 //login google
 Route::get('login/google',[LoginController::class,'redirectToGoogle'])->name('login.google');
@@ -275,13 +280,16 @@ Route::get('login/google/callback',[LoginController::class,'handleGoogleCallback
 Route::get('login/facebook',[LoginController::class,'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback',[LoginController::class,'handleFacebookCallback']);
 
+// ====================================== LARAVEL SOCIATLITE END=====================================
+
+
 //Order Track
 Route::post('order/track', [TrackingController::class,'orderTrackNow'])->name('order.track');
 
 
- //search product
- Route::get('/search-products',[SearchController::class,'searchProduct'])->name('search.product');
- Route::post('/find-products',[SearchController::class,'findProducts']);
+//search product
+Route::get('/search-products',[SearchController::class,'searchProduct'])->name('search.product');
+Route::post('/find-products',[SearchController::class,'findProducts']);
 
 
 
