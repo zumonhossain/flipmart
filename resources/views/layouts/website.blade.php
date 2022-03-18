@@ -509,6 +509,7 @@
 					'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
 				}
 			})
+			
 
 			//start product view with modal
 			function productView(id){
@@ -621,6 +622,12 @@
 
 
 
+		<!-- =============== Short By Product Start ==================== -->
+		@yield('scripts')
+		<!-- =============== Short By Product End ==================== -->
+
+
+		
 		<!-- =============== Mini Cart Start ==================== -->
 		<script>
 			/// mini cart product add start

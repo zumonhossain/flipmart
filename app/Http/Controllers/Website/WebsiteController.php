@@ -59,15 +59,43 @@ class WebsiteController extends Controller{
         return view('website.tag-product',compact('products','categories'));
     }
     //subcategory wise product show
-    public function subCatWiseProduct($subcat_id,$slug){
-        $products = Product::where('product_status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(1);
+    public function subCatWiseProduct(Request $request,$subcat_id,$slug){
+        $products = Product::where('product_status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(10);
         $categories = Category::orderBy('category_name','ASC')->get();
-        return view('website.sub-category-product',compact('products','categories'));
+
+        $sort = '';
+        if ($request->sort != null) {
+            $sort = $request->sort;
+        }
+
+        if ($subcat_id == null) {
+            return view('errors.404');
+        }else {
+            if ($sort == 'priceLowtoHigh') {
+                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('selling_price','ASC')->paginate(10);
+            }elseif ($sort == 'priceHightoLow') {
+                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('selling_price','DESC')->paginate(10);
+            }elseif ($sort == 'nameAtoZ') {
+                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('product_name','ASC')->paginate(10);
+            }elseif ($sort == 'nameZtoA') {
+                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('product_name','DESC')->paginate(10);
+            }else {
+                $products = Product::where('product_status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(10);
+            }
+        }
+
+        $subCatId = $subcat_id;
+        $subCatSlug = $slug;
+        $route = 'subcategory/product';
+
+        return view('website.sub-category-product',compact('products','categories','route','subCatSlug','subCatId','sort'));
     }
     //subsubcatgory wise product show
     public function subSubCatWiseProduct($subsubcat_id,$slug){
         $products = Product::where('product_status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(1);
         $categories = Category::orderBy('category_name','ASC')->get();
+
+
         return view('website.sub-sub-category-product',compact('products','categories'));
     }
 
