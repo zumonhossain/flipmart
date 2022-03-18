@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Mail\orderMail;
 use Carbon\Carbon;
 use Session;
@@ -86,6 +87,12 @@ class StripeController extends Controller{
             ]);
         }
 
+        //product stock decrement start
+        foreach($carts as $pro){
+            Product::where('id',$pro->id)->decrement('product_qty',$pro->qty);
+        }
+        //product stock decrement end
+        
         if (Session::has('coupon')) {
             Session::forget('coupon');
         }

@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\CustomerReviewController;
+use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\TrackingController;
@@ -176,6 +177,11 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     Route::get('review-create',[CustomerReviewController::class,'create'])->name('customer.review');
     Route::get('review-delete/{review_id}',[CustomerReviewController::class,'destroy']);
     Route::get('review-approve/{review_id}',[CustomerReviewController::class,'approveNow']);
+
+    //stock management
+    Route::get('product-stock',[StockController::class,'index'])->name('product.stock');
+    Route::get('product-stock/edit/{id}',[StockController::class,'edit'])->name('stock.edit');
+    Route::post('product-stock/update',[StockController::class,'update'])->name('stock.update');
 
 });
 
