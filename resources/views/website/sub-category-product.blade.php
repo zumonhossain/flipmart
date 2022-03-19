@@ -104,133 +104,26 @@
                         <div id="myTabContent" class="tab-content category-list">
                             <div class="tab-pane active " id="grid-container">
                                 <div class="category-product">
-                                    <div class="row">	
-                                        @forelse($products as $product)
-                                            <div class="col-sm-6 col-md-4 wow fadeInUp">
-                                                <div class="products">
-                                                    <div class="product">		
-                                                        <div class="product-image">
-                                                            <div class="image">
-                                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a>
-                                                            </div><!-- /.image -->	
-
-                                                            @php
-                                                                $amount = $product->selling_price - $product->discount_price;
-                                                                $discount = ( $amount/$product->selling_price) * 100;
-                                                            @endphp	
-
-                                                            <div class="tag sale">
-                                                                @if ($product->discount_price == NULL)
-                                                                    <span> new </span>
-                                                                @else
-                                                                    <span> {{ round($discount) }}% </span>
-                                                                @endif
-                                                            </div>                       		   
-                                                        </div><!-- /.product-image -->
-                                                        <div class="product-info text-left">
-                                                            <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></h3>
-                                                            <div class="rating rateit-small"></div>
-                                                            <div class="description"></div>
-                                                            <div class="product-price">	
-                                                                <span class="price">${{ $product->selling_price }}</span>
-												                <span class="price-before-discount">${{ $product->discount_price }}</span>							
-                                                            </div><!-- /.product-price -->
-                                                        </div><!-- /.product-info -->
-                                                        <div class="cart clearfix animate-effect">
-                                                            <div class="action">
-                                                                <ul class="list-unstyled">
-                                                                    <li class="add-cart-button btn-group">
-                                                                        <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#cartModal"  id="{{ $product->id }}" onclick="productView(this.id)">
-                                                                            <i class="fa fa-shopping-cart"></i>					
-                                                                        </button>					
-                                                                    </li>
-                                                                    <button class="btn btn-primary icon" type="button" title="Add to WIshlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)">
-                                                                        <i class="icon fa fa-heart"></i>
-                                                                    </button>
-                                                                </ul>
-                                                            </div><!-- /.action -->
-                                                        </div><!-- /.cart -->
-                                                    </div><!-- /.product -->
-                                                </div><!-- /.products -->
-                                            </div><!-- /.item -->
-                                        @empty
-                                            <div class="text-danger" style="font-size:35px;text-align:center;margin-bottom: 50px;font-weight: bold;">
-                                                No Product Found
-                                            </div>
-
-                                        @endforelse
+                                    <div class="row" id="grid_view_product">	
+                                        @include('website.includes.grid_view_product')
                                     </div><!-- /.row -->
                                 </div><!-- /.category-product -->
                             </div><!-- /.tab-pane -->
                             <div class="tab-pane "  id="list-container">
-                                <div class="category-product">
-                                    @forelse($products as $product)
-                                        <div class="category-product-inner wow fadeInUp">
-                                            <div class="products">				
-                                                <div class="product-list product">
-                                                    <div class="row product-list-row">
-                                                        <div class="col col-sm-4 col-lg-4">
-                                                            <div class="product-image">
-                                                                <div class="image">
-                                                                    <img src="{{ asset($product->product_thambnail) }}" alt="">
-                                                                </div>
-                                                            </div><!-- /.product-image -->
-                                                        </div><!-- /.col -->
-                                                        <div class="col col-sm-8 col-lg-8">
-                                                            <div class="product-info">
-                                                                <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></h3>
-                                                                <div class="rating rateit-small"></div>
-                                                                <div class="product-price">	
-                                                                    <span class="price">{{ $product->selling_price }}</span>
-												                    <span class="price-before-discount">{{ $product->discount_price }}</span>						
-                                                                </div><!-- /.product-price -->
-                                                                <div class="description m-t-10">
-                                                                    {!! $product->short_description !!}
-                                                                </div>
-                                                                <div class="cart clearfix animate-effect">
-                                                                    <div class="action">
-                                                                        <ul class="list-unstyled">
-                                                                            <li class="add-cart-button btn-group">
-                                                                                <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#cartModal"  id="{{ $product->id }}" onclick="productView(this.id)">
-                                                                                    <i class="fa fa-shopping-cart"></i>					
-                                                                                </button>					
-                                                                            </li>
-                                                                            <button class="btn btn-primary icon" type="button" title="Add to WIshlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)">
-                                                                                <i class="icon fa fa-heart"></i>
-                                                                            </button>
-                                                                        </ul>
-                                                                    </div><!-- /.action -->
-                                                                </div><!-- /.cart -->	
-                                                            </div><!-- /.product-info -->	
-                                                        </div><!-- /.col -->
-                                                    </div><!-- /.product-list-row -->
-
-                                                    @php
-                                                        $amount = $product->selling_price - $product->discount_price;
-                                                        $discount = ( $amount/$product->selling_price) * 100;
-                                                    @endphp	
-
-                                                    <div class="tag new">
-                                                        @if ($product->discount_price == NULL)
-                                                            <span> new </span>
-                                                        @else
-                                                            <span> {{ round($discount) }}% </span>
-                                                        @endif
-                                                    </div>        
-                                                </div><!-- /.product-list -->
-                                            </div><!-- /.products -->
-                                        </div><!-- /.category-product-inner -->
-                                    @empty
-                                        <div class="text-danger" style="font-size:35px;text-align:center;margin-bottom: 50px;font-weight: bold;">
-                                            No Product Found
-                                        </div>
-
-                                    @endforelse
+                                <div class="category-product" id="list_view_product">
+                                    @include('website.includes.list_view_product')
                                 </div><!-- /.category-product -->
                             </div><!-- /.tab-pane #list-container -->
                         </div><!-- /.tab-content -->
                     </div><!-- /.search-result-container -->
                 </div><!-- /.col -->
+
+                <!-- ========== Ajax Loadmore Start =========== -->
+                <div class="ajax-loadmore-product text-center" style="display: none">
+                    <img src="{{ asset('contents/website/assets/images/ajaxloader.gif') }}" style="display: block; margin-left:auto; margin-right:auto; width:10%" alt="">
+                </div>
+                <!-- ========== Ajax Loadmore Start =========== -->
+
             </div><!-- /.row -->
             <!-- ========== BRANDS CAROUSEL =========== -->
                 @include('website.includes.brand')
@@ -250,4 +143,41 @@
 
         });
     </script>
+
+    <!-- Ajax Loadmore -->
+    <script>
+        function loadmoreProduct(page) {
+            $.ajax({
+                    type: "get",
+                    url: "?page=" + page,
+                    beforeSend: function(response) {
+                        $('.ajax-loadmore-product').show();
+                    }
+                })
+
+                .done(function(data) {
+                    if (data.grid_view == " " || data.list_view == " ") {
+                        $('.ajax-loadmore-product').html('No More Product Found');
+                        return;
+                    }
+                    $('.ajax-loadmore-product').hide();
+
+                    $('#grid_view_product').append(data.grid_view);
+                    $('#list_view_product').append(data.list_view);
+                })
+
+                .fail(function() {
+                    alert('something went wrong')
+                });
+
+        }
+        var page = 1;
+        $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                loadmoreProduct(page);
+            }
+        });
+    </script>
+    <!-- Ajax Loadmore -->
 @endsection

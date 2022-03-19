@@ -9,6 +9,7 @@ use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\OrderItem;
 use App\Mail\orderMail;
 use App\Models\Order;
+use App\Models\Product;
 use Carbon\Carbon;
 use Session;
 use Cart;
@@ -118,6 +119,13 @@ class SslCommerzPaymentController extends Controller{
             }
 
 
+            //product stock decrement start
+            foreach($carts as $pro){
+                Product::where('id',$pro->id)->decrement('product_qty',$pro->qty);
+            }
+            //product stock decrement end
+
+            
             # OPTIONAL PARAMETERS
             
             $invoice = Order::findOrFail($order_id);
@@ -231,6 +239,15 @@ class SslCommerzPaymentController extends Controller{
                     'created_at' => Carbon::now(),
                 ]);
             }
+
+
+            //product stock decrement start
+            foreach($carts as $pro){
+                Product::where('id',$pro->id)->decrement('product_qty',$pro->qty);
+            }
+            //product stock decrement end
+
+
 
             # OPTIONAL PARAMETERS
 

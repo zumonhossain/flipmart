@@ -40,7 +40,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn-success view-icon" href="#"><i class="mdi mdi-arrow-up"></i></a>
+                                    <!-- <a class="btn-success view-icon" href=""><i class="mdi mdi-arrow-up"></i></a> -->
                                     <a class="btn-warning edit-icon" href="{{ route('stock.edit',$item->id) }}"><i class="mdi mdi-table-edit"></i></a>
                                 </td>
                             </tr>

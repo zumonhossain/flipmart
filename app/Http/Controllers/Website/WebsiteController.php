@@ -88,6 +88,13 @@ class WebsiteController extends Controller{
         $subCatSlug = $slug;
         $route = 'subcategory/product';
 
+        //loadmore product with ajax
+        if ($request->ajax()) {
+            $grid_view = view('website.includes.grid_view_product',compact('products'))->render();
+            $list_view = view('website.includes.list_view_product',compact('products'))->render();
+            return response()->json(['grid_view' => $grid_view,'list_view'=>$list_view]);
+        }
+
         return view('website.sub-category-product',compact('products','categories','route','subCatSlug','subCatId','sort'));
     }
     //subsubcatgory wise product show
