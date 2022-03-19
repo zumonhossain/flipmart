@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\CustomerReviewController;
 use App\Http\Controllers\Admin\StockController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\TrackingController;
@@ -183,6 +184,14 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     Route::get('product-stock/edit/{id}',[StockController::class,'edit'])->name('stock.edit');
     Route::post('product-stock/update',[StockController::class,'update'])->name('stock.update');
     Route::post('product-stock/update',[StockController::class,'update'])->name('stock.update');
+
+    //Role management
+    route::get('role',[RoleController::class,'index'])->name('role');
+    route::get('role/add',[RoleController::class,'add'])->name('role.add');
+    route::post('role/submit',[RoleController::class,'insert'])->name('role.insert');
+    route::get('role/edit/{id}',[RoleController::class,'edit'])->name('role.edit');
+    route::post('role/update',[RoleController::class,'update'])->name('role.update');
+    route::get('role/delete/{id}',[RoleController::class,'delete'])->name('role.delete');
 
 });
 
