@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\CustomerReviewController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\TrackingController;
@@ -192,6 +193,14 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     route::get('role/edit/{id}',[RoleController::class,'edit'])->name('role.edit');
     route::post('role/update',[RoleController::class,'update'])->name('role.update');
     route::get('role/delete/{id}',[RoleController::class,'delete'])->name('role.delete');
+
+    //Permission management
+    route::get('permission',[PermissionController::class,'index'])->name('permission');
+    route::get('permission/add',[PermissionController::class,'add'])->name('permission.add');
+    route::post('permission/submit',[PermissionController::class,'insert'])->name('permission.insert');
+    route::get('permission/edit/{id}',[PermissionController::class,'edit'])->name('permission.edit');
+    route::post('permission/update',[PermissionController::class,'update'])->name('permission.update');
+    route::get('permission/delete/{id}',[PermissionController::class,'delete'])->name('permission.delete');
 
 });
 
