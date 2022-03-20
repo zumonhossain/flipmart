@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -32,7 +33,7 @@ class RegisterController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     protected function redirectTo(){
-        if(Auth()->user()->role_id == 1){
+        if(Auth()->user()->role_id != 2 ){
             return route('admin.dashboard');
         }elseif(Auth()->user()->role_id == 2){
             return route('user.dashboard');

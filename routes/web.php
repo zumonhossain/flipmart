@@ -50,7 +50,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // ================= Admin Routes ======================
-Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Admin'], function(){
+Route::group(['prefix'=>'admin','middleware'=>['admin','auth','permission']], function(){
     route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     
     // All Users

@@ -4,10 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
 
-class AdminMiddleware
-{
+class AdminPermission{
+
+    use \App\Traits\AdminPermission;
+
     /**
      * Handle an incoming request.
      *
@@ -15,12 +16,12 @@ class AdminMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
-    {
-        if(Auth::check() && Auth::user()->role_id != 2 ){
-            return $next($request);
-        }else{
-            return redirect()->route('login');
+    public function handle(Request $request, Closure $next){
+
+        if ($this->checkRequestPermission()) {
+            return response()->view('admin.home');
         }
+
+        return $next($request);
     }
 }

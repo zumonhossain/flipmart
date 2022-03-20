@@ -13,7 +13,7 @@
                     <form method="post" action="{{ route('permission.update') }}" class="form-horizontal">
                         @csrf
 
-                        <input type="text" name="id" value="{{ $permission->id }}">
+                        <input type="hidden" name="id" value="{{ $permission->id }}">
 
                         <div class="row">
                             <div class="col-md-4">

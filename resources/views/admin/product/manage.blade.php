@@ -12,7 +12,11 @@
                             <i class="fa fa-gg-circle"></i> All Product Information
                         </div>
                         <div class="col-md-4 text-right">
-                            <a href="{{route('product.add')}}" class="btn btn-sm btn-dark card_top_btn"><i class="fa fa-plus-circle"></i> Add Product</a>
+
+                            @isset(auth()->user()->role->permission['permission']['product']['add'])
+                                <a href="{{route('product.add')}}" class="btn btn-sm btn-dark card_top_btn"><i class="fa fa-plus-circle"></i> Add Product</a>
+                            @endisset
+                            
                         </div>
                     </div>
                 </div>
@@ -57,8 +61,12 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn-success view-icon" href="{{ url('admin/product/view/'.$product->product_slug) }}"><i class="mdi mdi-library-plus"></i></a>
-                                            <a class="btn-warning edit-icon" href="{{ url('admin/product/edit/'.$product->product_slug) }}"><i class="mdi mdi-table-edit"></i></a>
+                                            @isset(auth()->user()->role->permission['permission']['product']['view'])
+                                                <a class="btn-success view-icon" href="{{ url('admin/product/view/'.$product->product_slug) }}"><i class="mdi mdi-library-plus"></i></a>
+                                            @endisset
+                                            @isset(auth()->user()->role->permission['permission']['product']['edit'])
+                                                <a class="btn-warning edit-icon" href="{{ url('admin/product/edit/'.$product->product_slug) }}"><i class="mdi mdi-table-edit"></i></a>
+                                            @endisset
 
                                             @if ($product->product_status == 1)
                                                 <a href="{{ url('admin/product-inactive/'.$product->product_slug) }}" class="btn btn-sm btn-danger edit-icon" title="inactive"> <i class="fa fa-arrow-down"></i></a>
@@ -66,7 +74,9 @@
                                                 <a href="{{ url('admin/product-active/'.$product->product_slug) }}" class="btn btn-sm btn-success edit-icon" title="active now data"> <i class="fa fa-arrow-up"></i></a>
                                             @endif
                                             
-                                            <a class="btn-danger delete-icon" id="softDelete" data-toggle="modal" data-target="#softDelModal" data-id="{{$product->id}}" href="#"><i class="mdi mdi-delete"></i></a>
+                                            @isset(auth()->user()->role->permission['permission']['product']['delete'])
+                                                <a class="btn-danger delete-icon" id="softDelete" data-toggle="modal" data-target="#softDelModal" data-id="{{$product->id}}" href="#"><i class="mdi mdi-delete"></i></a>
+                                            @endisset
                                         </td>
                                     </tr>
                                 @endforeach

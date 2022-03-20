@@ -32,7 +32,7 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     protected function redirectTo(){
-        if(Auth()->user()->role_id == 1){
+        if(Auth()->user()->role_id != 2 ){
             return route('admin.dashboard');
         }elseif(Auth()->user()->role_id == 2){
             return route('user.dashboard');

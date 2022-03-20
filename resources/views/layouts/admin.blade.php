@@ -199,29 +199,56 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
+
                         <li> 
                             <a class="waves-effect waves-dark" href="{{ url('admin/dashboard') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li> 
                             <a class="waves-effect waves-dark" href="{{ url('admin/all-users') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">All Users</span></a>
                         </li>
-                        <li>
-                            <a class="waves-effect waves-dark" href="{{ url('admin/banner') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Banner</span></a>
-                        </li>
-                        <li> 
-                            <a class="waves-effect waves-dark" href="{{ url('admin/brand') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Brands</span></a>
-                        </li>
-                        <li> 
-                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Add Category</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{ route('category') }}">Category</a></li>
-                                <li><a href="{{ route('sub-category') }}">Sub Category</a></li>
-                                <li><a href="{{ route('sub-sub-category') }}">Sub SubCategory</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="waves-effect waves-dark" href="{{ url('admin/product') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Product</span></a>
-                        </li>
+                        @isset(auth()->user()->role->permission['permission']['banner']['list'])
+                            <li>
+                                <a class="waves-effect waves-dark" href="{{ url('admin/banner') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Banner</span></a>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['brand']['list'])
+                            <li> 
+                                <a class="waves-effect waves-dark" href="{{ url('admin/brand') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Brands</span></a>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['cat']['list'])
+                            <li> 
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Add Category</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{ route('category') }}">Category</a></li>
+                                    <li><a href="{{ route('sub-category') }}">Sub Category</a></li>
+                                    <li><a href="{{ route('sub-sub-category') }}">Sub SubCategory</a></li>
+                                </ul>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['product']['list'])
+                            <li>
+                                <a class="waves-effect waves-dark" href="{{ url('admin/product') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Product</span></a>
+                            </li>
+
+                            <li> 
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Product</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    
+                                    @isset(auth()->user()->role->permission['permission']['product']['add'])
+                                        <li><a href="{{ route('product.add') }}">Add Product</a></li>
+                                    @endisset
+
+                                    @isset(auth()->user()->role->permission['permission']['product']['list'])
+                                        <li><a href="{{ route('product.manage') }}">All Product</a></li>
+                                    @endisset
+                                </ul>
+                            </li>
+                        @endisset
+
                         <li> 
                             <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Shipping Area</span></a>
                             <ul aria-expanded="false" class="collapse">

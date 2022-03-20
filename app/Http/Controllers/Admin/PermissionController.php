@@ -46,7 +46,7 @@ class PermissionController extends Controller{
         $id = $request['id'];
         
         $request->validate([
-            'role_id' => 'required|numeric|unique:permissions,role_id'
+            'role_id' => 'required|exists:permissions,role_id'
         ],[
             'role_id.required'=>'Please enter select permission role!',
         ]);
