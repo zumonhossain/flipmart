@@ -262,10 +262,17 @@
                             </ul>
                         </li>
                         <li> 
-                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Permission Management</span></a>
+                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Permission</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('permission.add') }}">Add Permission</a></li>
                                 <li><a href="{{ route('permission') }}">All Permission</a></li>
+                            </ul>
+                        </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Subadmin</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{ route('subadmin.add') }}">Add Subadmin</a></li>
+                                <li><a href="{{ route('subadmin') }}">All Subadmin</a></li>
                             </ul>
                         </li>
                         <li>

@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\CustomerReviewController;
 use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\SubadminController;
 use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\TrackingController;
@@ -201,6 +202,14 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'Adm
     route::get('permission/edit/{id}',[PermissionController::class,'edit'])->name('permission.edit');
     route::post('permission/update',[PermissionController::class,'update'])->name('permission.update');
     route::get('permission/delete/{id}',[PermissionController::class,'delete'])->name('permission.delete');
+
+    //Subadmin management
+    route::get('subadmin',[SubadminController::class,'index'])->name('subadmin');
+    route::get('subadmin/add',[SubadminController::class,'add'])->name('subadmin.add');
+    route::post('subadmin/submit',[SubadminController::class,'insert'])->name('subadmin.insert');
+    route::get('subadmin/edit/{id}',[SubadminController::class,'edit'])->name('subadmin.edit');
+    route::post('subadmin/update',[SubadminController::class,'update'])->name('subadmin.update');
+    route::get('subadmin/delete/{id}',[SubadminController::class,'delete'])->name('subadmin.delete');
 
 });
 
