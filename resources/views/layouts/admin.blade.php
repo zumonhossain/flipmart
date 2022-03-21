@@ -131,24 +131,21 @@
                         </li>
                         <!-- ============================ Profile Start ================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('contents/admin') }}/assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset(Auth::user()->image) }}" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
                                 <ul class="dropdown-user">
                                     <li>
                                         <div class="dw-user-box">
-                                            <div class="u-img"><img src="{{ asset('contents/admin') }}/assets/images/users/1.jpg" alt="user"></div>
+                                            <div class="u-img"><img src="{{ asset(Auth::user()->image) }}" alt="user"></div>
                                             <div class="u-text">
                                                 <h4>{{ auth::user()->name }}</h4>
-                                                <p class="text-muted">{{ auth::user()->email }}</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                                <p class="text-muted">{{ auth::user()->email }}</p><a href="{{ route('my.profile') }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                                             </div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="index.html#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="index.html#"><i class="ti-wallet"></i> My Balance</a></li>
-                                    <li><a href="index.html#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="index.html#"><i class="ti-settings"></i> Account Setting</a></li>
+                                    <li><a href="{{ route('my.profile') }}"><i class="ti-user"></i> My Profile</a></li>
+                                    <li><a href="{{ route('my.profile') }}"><i class="ti-settings"></i> Account Setting</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
@@ -167,7 +164,7 @@
                 <!-- User profile -->
                 <div class="user-profile">
                     <!-- User profile image -->
-                    <div class="profile-img"> <img src="{{ asset('contents/admin') }}/assets/images/users/profile.png" alt="user" />
+                    <div class="profile-img"> <img src="{{ asset(Auth::user()->image) }}" alt="user" />
                         <!-- this is blinking heartbit-->
                         <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
                     </div>
@@ -179,15 +176,11 @@
                         <a href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
                         <div class="dropdown-menu animated flipInY">
                             <!-- text-->
-                            <a href="index.html#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                            <!-- text-->
-                            <a href="index.html#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-                            <!-- text-->
-                            <a href="index.html#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                            <a href="{{ route('my.profile') }}" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
                             <!-- text-->
                             <div class="dropdown-divider"></div>
                             <!-- text-->
-                            <a href="index.html#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                            <a href="{{ route('my.profile') }}" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                             <!-- text-->
                             <div class="dropdown-divider"></div>
                             <!-- text-->

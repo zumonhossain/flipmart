@@ -53,6 +53,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth','permission']], function(){
     route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
     
+    //My Profile routes
+    route::get('my/profile',[AdminController::class,'profile'])->name('my.profile');
+    Route::post('my/profile/update',[AdminController::class,'profileUpdate'])->name('profile.update');
+    Route::get('my/profile/image/change',[AdminController::class,'ProfileImagePage'])->name('profile.image');
+    Route::post('my/profile/image/update',[AdminController::class,'imageUpdate'])->name('image.update');
+    Route::get('my/profile/password/change',[AdminController::class,'ProfilePasswordPage'])->name('profile.passwordPage');
+    Route::post('my/profile/password/update',[AdminController::class,'ProfilePasswordUpdate'])->name('profile.PasswordUpdate');
+
     // All Users
     route::get('all-users',[AdminController::class,'allUsers'])->name('all-users');
     Route::get('user-banned/{user_id}',[AdminController::class,'banned'])->name('banned');
