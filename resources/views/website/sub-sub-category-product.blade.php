@@ -1,6 +1,6 @@
 @extends('layouts.website')
 @section('title')
-    Tags wise product 
+    Sub Subcategory Product
 @endsection 
 @section('content')
     <div class="breadcrumb">
@@ -191,8 +191,8 @@
                                                             <div class="rating rateit-small"></div>
                                                             <div class="description"></div>
                                                             <div class="product-price">	
-                                                                <span class="price">{{ $product->selling_price }}</span>
-												                <span class="price-before-discount">{{ $product->discount_price }}</span>							
+                                                                <span class="price">${{ $product->selling_price }}</span>
+												                <span class="price-before-discount">${{ $product->discount_price }}</span>							
                                                             </div><!-- /.product-price -->
                                                         </div><!-- /.product-info -->
                                                         <div class="cart clearfix animate-effect">
@@ -240,8 +240,8 @@
                                                                 <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></h3>
                                                                 <div class="rating rateit-small"></div>
                                                                 <div class="product-price">	
-                                                                    <span class="price">{{ $product->selling_price }}</span>
-												                    <span class="price-before-discount">{{ $product->discount_price }}</span>						
+                                                                    <span class="price">${{ $product->selling_price }}</span>
+												                    <span class="price-before-discount">${{ $product->discount_price }}</span>						
                                                                 </div><!-- /.product-price -->
                                                                 <div class="description m-t-10">
                                                                     {!! $product->short_description !!}

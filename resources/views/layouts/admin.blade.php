@@ -10,6 +10,8 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('contents/admin') }}/assets/images/favicon.png">
     <title> @yield('title') </title>
@@ -203,24 +205,27 @@
                         <li> 
                             <a class="waves-effect waves-dark" href="{{ url('admin/dashboard') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
-                        <li> 
-                            <a class="waves-effect waves-dark" href="{{ url('admin/all-users') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">All Users</span></a>
-                        </li>
+                        @isset(auth()->user()->role->permission['permission']['user']['list'])
+                            <li> 
+                                <a class="waves-effect waves-dark" href="{{ url('admin/all-users') }}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">All Users</span></a>
+                            </li>
+                        @endisset
+
                         @isset(auth()->user()->role->permission['permission']['banner']['list'])
                             <li>
-                                <a class="waves-effect waves-dark" href="{{ url('admin/banner') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Banner</span></a>
+                                <a class="waves-effect waves-dark" href="{{ url('admin/banner') }}" aria-expanded="false"><i class="mdi mdi-folder-multiple-image"></i><span class="hide-menu">Banner</span></a>
                             </li>
                         @endisset
 
                         @isset(auth()->user()->role->permission['permission']['brand']['list'])
                             <li> 
-                                <a class="waves-effect waves-dark" href="{{ url('admin/brand') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Brands</span></a>
+                                <a class="waves-effect waves-dark" href="{{ url('admin/brand') }}" aria-expanded="false"><i class="mdi mdi-cards"></i><span class="hide-menu">Brands</span></a>
                             </li>
                         @endisset
 
                         @isset(auth()->user()->role->permission['permission']['cat']['list'])
                             <li> 
-                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Add Category</span></a>
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">Add Category</span></a>
                                 <ul aria-expanded="false" class="collapse">
                                     <li><a href="{{ route('category') }}">Category</a></li>
                                     <li><a href="{{ route('sub-category') }}">Sub Category</a></li>
@@ -230,12 +235,8 @@
                         @endisset
 
                         @isset(auth()->user()->role->permission['permission']['product']['list'])
-                            <li>
-                                <a class="waves-effect waves-dark" href="{{ url('admin/product') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Product</span></a>
-                            </li>
-
                             <li> 
-                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Product</span></a>
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="hide-menu">Product</span></a>
                                 <ul aria-expanded="false" class="collapse">
                                     
                                     @isset(auth()->user()->role->permission['permission']['product']['add'])
@@ -249,59 +250,86 @@
                             </li>
                         @endisset
 
-                        <li> 
-                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Shipping Area</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{ route('division') }}">Division</a></li>
-                                <li><a href="{{ route('district') }}">District</a></li>
-                                <li><a href="{{ route('state') }}">State</a></li>
-                            </ul>
-                        </li>
-                        <li> 
-                            <a class="waves-effect waves-dark" href="{{ url('admin/coupon') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Coupon</span></a>
-                        </li>
-                        <li> 
-                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Order</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{ route('pending-orders') }}">Pending Order</a></li>
-                                <li><a href="{{ route('confirmed-orders') }}">Confirmed Order</a></li>
-                                <li><a href="{{ route('processing-orders') }}">Processing Order</a></li>
-                                <li><a href="{{ route('picked-orders') }}">Picked Order</a></li>
-                                <li><a href="{{ route('shipped-orders') }}">Shipped Order</a></li>
-                                <li><a href="{{ route('delivered-orders') }}">Delivered Order</a></li>
-                                <li><a href="{{ route('order-cancel') }}">Cancel Order</a></li>
-                            </ul>
-                        </li>
-                        <li> 
-                            <a class="waves-effect waves-dark" href="{{ route('reports') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Reports</span></a>
-                        </li>
-                        <li> 
-                            <a class="waves-effect waves-dark" href="{{ route('customer.review') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Review</span></a>
-                        </li>
-                        <li> 
-                            <a class="waves-effect waves-dark" href="{{ route('product.stock') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Stock Management</span></a>
-                        </li>
-                        <li> 
-                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Role Management</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{ route('role.add') }}">Add Role</a></li>
-                                <li><a href="{{ route('role') }}">All Role</a></li>
-                            </ul>
-                        </li>
-                        <li> 
-                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Permission</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{ route('permission.add') }}">Add Permission</a></li>
-                                <li><a href="{{ route('permission') }}">All Permission</a></li>
-                            </ul>
-                        </li>
-                        <li> 
-                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Subadmin</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="{{ route('subadmin.add') }}">Add Subadmin</a></li>
-                                <li><a href="{{ route('subadmin') }}">All Subadmin</a></li>
-                            </ul>
-                        </li>
+                        @isset(auth()->user()->role->permission['permission']['shipping']['list'])
+                            <li> 
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-google-maps"></i><span class="hide-menu">Shipping Area</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{ route('division') }}">Division</a></li>
+                                    <li><a href="{{ route('district') }}">District</a></li>
+                                    <li><a href="{{ route('state') }}">State</a></li>
+                                </ul>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['coupon']['list'])
+                            <li> 
+                                <a class="waves-effect waves-dark" href="{{ url('admin/coupon') }}" aria-expanded="false"><i class="mdi mdi-book-open-variant"></i><span class="hide-menu">Coupon</span></a>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['order']['list'])
+                            <li> 
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-ambulance"></i><span class="hide-menu">Order</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{ route('pending-orders') }}">Pending Order</a></li>
+                                    <li><a href="{{ route('confirmed-orders') }}">Confirmed Order</a></li>
+                                    <li><a href="{{ route('processing-orders') }}">Processing Order</a></li>
+                                    <li><a href="{{ route('picked-orders') }}">Picked Order</a></li>
+                                    <li><a href="{{ route('shipped-orders') }}">Shipped Order</a></li>
+                                    <li><a href="{{ route('delivered-orders') }}">Delivered Order</a></li>
+                                    <li><a href="{{ route('order-cancel') }}">Cancel Order</a></li>
+                                </ul>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['reports']['list'])
+                            <li> 
+                                <a class="waves-effect waves-dark" href="{{ route('reports') }}" aria-expanded="false"><i class="mdi mdi-book-multiple"></i><span class="hide-menu">Reports</span></a>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['review']['list'])
+                            <li> 
+                                <a class="waves-effect waves-dark" href="{{ route('customer.review') }}" aria-expanded="false"><i class="mdi mdi-skip-previous-circle"></i><span class="hide-menu">Review</span></a>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['stock']['list'])
+                            <li> 
+                                <a class="waves-effect waves-dark" href="{{ route('product.stock') }}" aria-expanded="false"><i class="mdi mdi-stocking"></i><span class="hide-menu">Stock</span></a>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['role']['list'])
+                            <li> 
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-access-point"></i><span class="hide-menu">Role Management</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{ route('role.add') }}">Add Role</a></li>
+                                    <li><a href="{{ route('role') }}">All Role</a></li>
+                                </ul>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['permission']['list'])
+                            <li> 
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-account-key"></i><span class="hide-menu">Permission</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{ route('permission.add') }}">Add Permission</a></li>
+                                    <li><a href="{{ route('permission') }}">All Permission</a></li>
+                                </ul>
+                            </li>
+                        @endisset
+
+                        @isset(auth()->user()->role->permission['permission']['subadmin']['list'])
+                            <li> 
+                                <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-account-settings-variant"></i><span class="hide-menu">Subadmin</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="{{ route('subadmin.add') }}">Add Subadmin</a></li>
+                                    <li><a href="{{ route('subadmin') }}">All Subadmin</a></li>
+                                </ul>
+                            </li>
+                        @endisset
+
                         <li>
                             <a class="waves-effect waves-dark" href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="mdi mdi-power"></i><span class="hide-menu">Logout</span></a>
                         </li>

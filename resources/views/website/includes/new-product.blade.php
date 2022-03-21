@@ -138,8 +138,8 @@
 											@endif
 											<div class="description"></div>
 											<div class="product-price">	
-												<span class="price">{{ $product->selling_price }}</span>
-												<span class="price-before-discount">{{ $product->discount_price }}</span>			
+												<span class="price">${{ $product->selling_price }}</span>
+												<span class="price-before-discount">${{ $product->discount_price }}</span>			
 											</div><!-- /.product-price -->
 										</div><!-- /.product-info -->
 										<div class="cart clearfix animate-effect">

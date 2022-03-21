@@ -54,13 +54,13 @@ class WebsiteController extends Controller{
 
     //tag wise product
     public function tagWiseProduct($tag){
-        $products = Product::where('product_status',1)->where('product_tags',$tag)->orderBy('id','DESC')->paginate(1);
+        $products = Product::where('product_status',1)->where('product_tags',$tag)->orderBy('id','DESC')->paginate(12);
         $categories = Category::orderBy('category_name','ASC')->get();
         return view('website.tag-product',compact('products','categories'));
     }
     //subcategory wise product show
     public function subCatWiseProduct(Request $request,$subcat_id,$slug){
-        $products = Product::where('product_status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(10);
+        $products = Product::where('product_status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(12);
         $categories = Category::orderBy('category_name','ASC')->get();
 
         $sort = '';
@@ -72,15 +72,15 @@ class WebsiteController extends Controller{
             return view('errors.404');
         }else {
             if ($sort == 'priceLowtoHigh') {
-                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('selling_price','ASC')->paginate(10);
+                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('selling_price','ASC')->paginate(12);
             }elseif ($sort == 'priceHightoLow') {
-                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('selling_price','DESC')->paginate(10);
+                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('selling_price','DESC')->paginate(12);
             }elseif ($sort == 'nameAtoZ') {
-                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('product_name','ASC')->paginate(10);
+                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('product_name','ASC')->paginate(12);
             }elseif ($sort == 'nameZtoA') {
-                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('product_name','DESC')->paginate(10);
+                $products = Product::where(['product_status' => 1,'subcategory_id' => $subcat_id])->orderBy('product_name','DESC')->paginate(12);
             }else {
-                $products = Product::where('product_status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(10);
+                $products = Product::where('product_status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(12);
             }
         }
 
@@ -99,7 +99,7 @@ class WebsiteController extends Controller{
     }
     //subsubcatgory wise product show
     public function subSubCatWiseProduct($subsubcat_id,$slug){
-        $products = Product::where('product_status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(1);
+        $products = Product::where('product_status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(12);
         $categories = Category::orderBy('category_name','ASC')->get();
 
 
