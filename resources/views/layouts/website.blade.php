@@ -480,7 +480,7 @@
 
 		<script src="{{ asset('contents/website') }}/assets/js/sweetalert2@8.js"></script>
 
-		<script src="{{ asset('contents/website') }}/assets/js/toastr.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 		<script>
 			@if(Session::has('messege'))
 				var type="{{Session::get('alert-type','info')}}"
@@ -496,7 +496,7 @@
 						break;
 					case 'error':
 						toastr.error("{{ Session::get('messege') }}");
-						break;
+					break;
 				}
 			@endif
 		</script>

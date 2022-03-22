@@ -51,6 +51,13 @@ class UserController extends Controller{
 
     //update image
     public function updateImage(Request $request){
+
+        $request->validate([
+            'image' => 'required',
+        ],[
+            'image.required' => 'Please enter image!',
+        ]);
+
         $old_image = $request->old_image;
 
         if (User::findOrFail(Auth::id())->image == 'uploads/website/user/avatar.png') {

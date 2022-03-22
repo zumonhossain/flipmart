@@ -230,14 +230,14 @@ class CartController extends Controller{
                 return view('user.checkout',compact('carts','cartQty','cartTotal','divisions'));
            }else {
             $notification=array(
-                'message'=>'Shopping Now',
+                'messege'=>'Shopping Now',
                 'alert-type'=>'error'
             );
             return Redirect()->to('/')->with($notification);
            }
         }else {
             $notification=array(
-                'message'=>'You Nedd to Login First',
+                'messege'=>'You Nedd to Login First',
                 'alert-type'=>'error'
             );
             return Redirect()->route('login')->with($notification);

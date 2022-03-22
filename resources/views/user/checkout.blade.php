@@ -180,6 +180,11 @@
                 </form>
                 </div><!-- /.row -->
             </div><!-- /.checkout-box -->
+
+            <!-- ========== BRANDS CAROUSEL =========== -->
+                @include('website.includes.brand')
+            <!-- ========= BRANDS CAROUSEL END =========== -->
+
         </div><!-- /.container -->
     </div><!-- /.body content -->
 

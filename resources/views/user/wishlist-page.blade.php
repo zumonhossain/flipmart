@@ -34,6 +34,11 @@
                     </div>			
                 </div><!-- /.row -->
             </div><!-- /.sigin-in-->
+
+            <!-- ========== BRANDS CAROUSEL =========== -->
+                @include('website.includes.brand')
+            <!-- ========= BRANDS CAROUSEL END =========== -->
+
         </div><!-- /.container -->
     </div><!-- /.body-content -->
 @endsection

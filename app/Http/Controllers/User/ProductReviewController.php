@@ -34,7 +34,7 @@ class ProductReviewController extends Controller{
         ]);
 
         $notification=array(
-            'message'=>'Review Done',
+            'messege'=>'Review Done',
             'alert-type'=>'success'
         );
         return Redirect()->back()->with($notification);
