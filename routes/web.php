@@ -26,6 +26,7 @@ use App\Http\Controllers\Website\WebsiteController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\TrackingController;
 use App\Http\Controllers\Website\SearchController;
+use App\Http\Controllers\Website\ShopController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -340,7 +341,8 @@ Route::get('/search-products',[SearchController::class,'searchProduct'])->name('
 Route::post('/find-products',[SearchController::class,'findProducts']);
 
 
-
+//shop
+Route::get('shop',[ShopController::class,'shopPage'])->name('shop');
 
 
 

@@ -1,8 +1,5 @@
 <div class="sidebar-widget wow fadeInUp">
-    <h3 class="section-title">shop by</h3>
-    <div class="widget-header">
-        <h4 class="widget-title">Category</h4>
-    </div>
+    <h3 class="section-title">Shop By Category</h3>
     <div class="sidebar-widget-body">
         <div class="accordion">
             @foreach ($categories as $category)

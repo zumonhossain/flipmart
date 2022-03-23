@@ -257,6 +257,8 @@
 											</li>
 										@endforeach
 
+										<li class="dropdown hidden-sm"><a href="{{ route('shop') }}">Shop</a></li>
+
 									</ul><!-- /.navbar-nav -->
 									<div class="clearfix"></div>				
 								</div><!-- /.nav-outer -->
