@@ -343,6 +343,7 @@ Route::post('/find-products',[SearchController::class,'findProducts']);
 
 //shop
 Route::get('shop',[ShopController::class,'shopPage'])->name('shop');
+Route::post('shop/filter',[ShopController::class,'shopFilter'])->name('shop.filter');
 
 
 
