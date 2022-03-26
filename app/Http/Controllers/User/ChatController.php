@@ -23,4 +23,8 @@ class ChatController extends Controller{
 
         return response()->json(['message' => 'Message Send Success']);
     }
+
+    public function chatPage(){
+        return view('user.chat.index');
+    }
 }

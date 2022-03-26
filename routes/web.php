@@ -350,6 +350,7 @@ Route::post('shop/filter',[ShopController::class,'shopFilter'])->name('shop.filt
 //user to buyer chat communication
 Route::group(['middleware' =>'auth'], function(){
     Route::post('send-message',[ChatController::class,'sendMsg'])->name('send.msg');
+    Route::get('my-chat',[ChatController::class,'chatPage'])->name('chat.page');
 });
 
 
