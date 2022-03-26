@@ -126,7 +126,19 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
 
-                                                    <send-message></send-message>
+                                                    @auth
+                                                        <send-message 
+
+                                                            :receiver-id="{{ $product->user_id }}" 
+                                                            receiver-name="{{ $product->user->name }}"
+                                                            :product-id="{{ $product->id }}"
+                                                        
+                                                        >
+
+                                                        </send-message>
+                                                    @else
+                                                        <h4 class="text-danger" style="font-size:12px">Chat This Seller To <a style="color:green;" href="{{ route('login') }}" target="_blank">Login</a> Your Account</h4>
+                                                    @endauth
 
                                                     <div class="price-box">
                                                         @if ($product->discount_price == NULL)

@@ -92,6 +92,7 @@ class ProductController extends Controller{
         $save_url = 'uploads/admin/product/thambnail/'.$name_gen;
 
         $product_id = Product::insertGetId([
+            'user_id' => Auth::id(),
             'brand_id'=>$request['brand_id'],
             'category_id'=>$request['category_id'],
             'subcategory_id'=>$request['subcategory_id'],
@@ -185,6 +186,7 @@ class ProductController extends Controller{
         $save_url = 'uploads/admin/product/thambnail/'.$name_gen;
 
         Product::where('product_status',1)->where('id',$id)->update([
+            'user_id' => Auth::id(),
             'brand_id'=>$request['brand_id'],
             'category_id'=>$request['category_id'],
             'subcategory_id'=>$request['subcategory_id'],

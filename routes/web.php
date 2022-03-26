@@ -6,6 +6,7 @@ use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\ProductReviewController;
+use App\Http\Controllers\User\ChatController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
@@ -346,8 +347,10 @@ Route::get('shop',[ShopController::class,'shopPage'])->name('shop');
 Route::post('shop/filter',[ShopController::class,'shopFilter'])->name('shop.filter');
 
 
-
-
+//user to buyer chat communication
+Route::group(['middleware' =>'auth'], function(){
+    Route::post('send-message',[ChatController::class,'sendMsg'])->name('send.msg');
+});
 
 
 
