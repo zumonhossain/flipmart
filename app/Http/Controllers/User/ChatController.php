@@ -64,4 +64,9 @@ class ChatController extends Controller{
             abort(404);
         }
     }
+
+    //for admin dashboard
+    public function adminChatPage(){
+        return view('admin.chat.index');
+    }
 }

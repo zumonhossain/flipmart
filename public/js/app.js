@@ -5346,6 +5346,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -5358,40 +5361,45 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    var _this = this;
+
     this.getAllUsers();
+    setInterval(function () {
+      _this.userMessage(_this.selectedUser);
+    }, 2000);
   },
   methods: {
     //get all users
     getAllUsers: function getAllUsers() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/user-all").then(function (res) {
-        _this.users = res.data;
+        _this2.users = res.data;
       })["catch"](function (err) {});
     },
     //get Seldcted Users messages
     userMessage: function userMessage(userId) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/user-messages/" + userId).then(function (res) {
-        _this2.allmessages = res.data;
-        _this2.selectedUser = userId;
+        _this3.allmessages = res.data;
+        _this3.selectedUser = userId;
       })["catch"](function (err) {});
     },
     sendMsg: function sendMsg() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.post("/send-message", {
         receiver_id: this.selectedUser,
         msg: this.msg
       }).then(function (result) {
-        _this3.msg = "";
+        _this4.msg = "";
 
-        _this3.userMessage(_this3.selectedUser);
+        _this4.userMessage(_this4.selectedUser);
 
         console.log(result.data);
       })["catch"](function (err) {
-        _this3.errors = err.response.data.errors;
+        _this4.errors = err.response.data.errors;
       });
     }
   }
@@ -50280,6 +50288,12 @@ var render = function () {
           _c("strong", [_vm._v("Chat List")]),
           _vm._v(" "),
           _c("hr"),
+          _vm._v(" "),
+          _vm.users == ""
+            ? _c("strong", { staticClass: "text-danger" }, [
+                _vm._v("No Users Found..!"),
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm._l(_vm.users, function (user, index) {
             return _c("li", { key: index }, [

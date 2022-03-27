@@ -2,15 +2,18 @@
   <div class="row">
     <div class="col-md-3 myUser">
         <ul class="user">
-           <strong>Chat List</strong>
-           <hr>
-        <li v-for="(user, index) in users" :key="index"> 
-          <a href="" @click.prevent="userMessage(user.id)">
-            <img :src="'/' + user.image" alt="UserImage" class="userImg" />
-            <span class="username text-center">{{ user.name }}</span>
-          </a>
-        </li>
-      </ul>
+          <strong>Chat List</strong>
+          <hr>
+
+          <strong v-if="users == ''" class="text-danger">No Users Found..!</strong>
+
+          <li v-for="(user, index) in users" :key="index"> 
+            <a href="" @click.prevent="userMessage(user.id)">
+              <img :src="'/' + user.image" alt="UserImage" class="userImg" />
+              <span class="username text-center">{{ user.name }}</span>
+            </a>
+          </li>
+        </ul>
     </div>
     <div class="col-md-9" v-if="allmessages.user">
         <div class="card">
@@ -97,6 +100,11 @@
 
         created() {
           this.getAllUsers();
+
+          setInterval(() => {
+            this.userMessage(this.selectedUser);
+          }, 2000);
+          
         },
 
         methods: {

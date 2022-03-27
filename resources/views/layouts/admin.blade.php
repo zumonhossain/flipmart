@@ -324,6 +324,9 @@
                         @endisset
 
                         <li>
+                            <a class="waves-effect waves-dark" href="{{ route('admin.chat') }}"><i class="mdi mdi-message"></i><span class="hide-menu">Chat</span></a>
+                        </li>
+                        <li>
                             <a class="waves-effect waves-dark" href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="mdi mdi-power"></i><span class="hide-menu">Logout</span></a>
                         </li>
                     </ul>
