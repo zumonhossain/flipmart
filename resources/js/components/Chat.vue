@@ -17,7 +17,7 @@
           <div class="card-header text-center myrow">
             <strong> {{ allmessages.user.name }} </strong>
           </div>
-          <div class="card-body chat-msg">
+          <div class="card-body chat-msg" v-chat-scroll>
             <ul class="chat" v-for="(msg, index) in allmessages.messages" :key="index">
 
             <li class="sender clearfix" v-if="allmessages.user.id === msg.sender_id">
@@ -28,7 +28,7 @@
                   <div class="header clearfix">
                     <strong class="primary-font">{{ msg.user.name }}</strong>
                     <small class="right text-muted">
-                      {{ msg.created_at }}
+                      {{ moment(msg.created_at).format('LLL') }}
                     </small>
                     <!-- //if send with product id  -->
                     <div class="text-center" v-if="msg.product">
@@ -48,7 +48,7 @@
                   </span>
                 <div class="chat-body clearfix">
                   <div class="header clearfix">
-                    <small class="left text-muted">{{ msg.created_at }}</small>
+                    <small class="left text-muted">{{ moment(msg.created_at).format('LLL') }}</small>
                     <div class="text-center" v-if="msg.product">
                         {{ msg.product.product_name }}
                         <img :src="'/' + msg.product.product_thambnail" alt="prouductImage" width="60px;"/>
@@ -81,6 +81,9 @@
 </template>
 
 <script>
+
+    import moment from 'moment';
+
     export default {
         data() {
           return {
@@ -88,6 +91,7 @@
             allmessages: {},
             selectedUser: "",
             msg: "",
+            moment: moment,
           };
         },
 
