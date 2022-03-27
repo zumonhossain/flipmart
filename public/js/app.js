@@ -5363,7 +5363,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      users: {}
+      users: {},
+      allmessages: {}
     };
   },
   created: function created() {
@@ -5376,6 +5377,14 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/user-all").then(function (res) {
         _this.users = res.data;
+      })["catch"](function (err) {});
+    },
+    //get Seldcted Users messages
+    userMessage: function userMessage(userId) {
+      var _this2 = this;
+
+      axios.get("/user-messages/" + userId).then(function (res) {
+        _this2.allmessages = res.data;
       })["catch"](function (err) {});
     }
   }
@@ -28734,16 +28743,28 @@ var render = function () {
           _vm._v(" "),
           _vm._l(_vm.users, function (user, index) {
             return _c("li", { key: index }, [
-              _c("a", { attrs: { href: "" } }, [
-                _c("img", {
-                  staticClass: "userImg",
-                  attrs: { src: "/" + user.image, alt: "UserImage" },
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "username text-center" }, [
-                  _vm._v(_vm._s(user.name)),
-                ]),
-              ]),
+              _c(
+                "a",
+                {
+                  attrs: { href: "" },
+                  on: {
+                    click: function ($event) {
+                      $event.preventDefault()
+                      return _vm.userMessage(user.id)
+                    },
+                  },
+                },
+                [
+                  _c("img", {
+                    staticClass: "userImg",
+                    attrs: { src: "/" + user.image, alt: "UserImage" },
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "username text-center" }, [
+                    _vm._v(_vm._s(user.name)),
+                  ]),
+                ]
+              ),
             ])
           }),
         ],
@@ -28751,7 +28772,50 @@ var render = function () {
       ),
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _vm.allmessages.user
+      ? _c("div", { staticClass: "col-md-9" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header text-center myrow" }, [
+              _c("strong", [
+                _vm._v(" " + _vm._s(_vm.allmessages.user.name) + " "),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-body chat-msg" },
+              _vm._l(_vm.allmessages.messages, function (msg, index) {
+                return _c("ul", { key: index, staticClass: "chat" }, [
+                  _vm.allmessages.user.id === msg.sender_id
+                    ? _c("li", { staticClass: "sender clearfix" }, [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "chat-body2 clearfix" }, [
+                          _vm._m(1, true),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(msg.msg))]),
+                        ]),
+                      ])
+                    : _c("li", { staticClass: "buyer clearfix" }, [
+                        _vm._m(2, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "chat-body clearfix" }, [
+                          _vm._m(3, true),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(msg.msg))]),
+                        ]),
+                      ]),
+                  _vm._v(" "),
+                  _vm._m(4, true),
+                ])
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _vm._m(5),
+          ]),
+        ])
+      : _vm._e(),
   ])
 }
 var staticRenderFns = [
@@ -28759,116 +28823,98 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header text-center myrow" }, [
-          _c("strong", [_vm._v(" Selected Users ")]),
-        ]),
+    return _c("span", { staticClass: "chat-img left clearfix mx-2" }, [
+      _c("img", {
+        staticClass: "userImg",
+        attrs: { src: "/uploads/website/avatar-2.png", alt: "userImg" },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "header clearfix" }, [
+      _c("strong", { staticClass: "primary-font" }, [_vm._v("Username1")]),
+      _vm._v(" "),
+      _c("small", { staticClass: "right text-muted" }, [
+        _vm._v("\n                  11:30am \n                "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center" }, [
+        _vm._v("\n                    product name\n                "),
+        _c("img", {
+          attrs: {
+            src: "/uploads/website/avatar-3.png",
+            alt: "productImg",
+            width: "60px;",
+          },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "chat-img right clearfix mx-2" }, [
+      _c("img", {
+        staticClass: "userImg",
+        attrs: { src: "/uploads/website/avatar-4.png", alt: "userImg" },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "header clearfix" }, [
+      _c("small", { staticClass: "left text-muted" }, [_vm._v("12:10pm")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center" }, [
+        _vm._v("\n                    Product name\n                 "),
+        _c("img", {
+          attrs: {
+            src: "/uploads/website/avatar-5.png",
+            alt: "prouductImage",
+            width: "60px;",
+          },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "sender clearfix" }, [
+      _c("span", { staticClass: "chat-img left clearfix mx-2" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          staticClass: "form-control input-sm",
+          attrs: {
+            id: "btn-input",
+            type: "text",
+            placeholder: "Type your message here...",
+          },
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body chat-msg" }, [
-          _c("ul", { staticClass: "chat" }, [
-            _c("li", { staticClass: "sender clearfix" }, [
-              _c("span", { staticClass: "chat-img left clearfix mx-2" }, [
-                _c("img", {
-                  staticClass: "userImg",
-                  attrs: {
-                    src: "/uploads/website/avatar-2.png",
-                    alt: "userImg",
-                  },
-                }),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "chat-body2 clearfix" }, [
-                _c("div", { staticClass: "header clearfix" }, [
-                  _c("strong", { staticClass: "primary-font" }, [
-                    _vm._v("Username1"),
-                  ]),
-                  _vm._v(" "),
-                  _c("small", { staticClass: "right text-muted" }, [
-                    _vm._v("\n                  11:30am \n                "),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "text-center" }, [
-                    _vm._v(
-                      "\n                    product name\n                "
-                    ),
-                    _c("img", {
-                      attrs: {
-                        src: "/uploads/website/avatar-3.png",
-                        alt: "productImg",
-                        width: "60px;",
-                      },
-                    }),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Hi..")]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "buyer clearfix" }, [
-              _c("span", { staticClass: "chat-img right clearfix mx-2" }, [
-                _c("img", {
-                  staticClass: "userImg",
-                  attrs: {
-                    src: "/uploads/website/avatar-4.png",
-                    alt: "userImg",
-                  },
-                }),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "chat-body clearfix" }, [
-                _c("div", { staticClass: "header clearfix" }, [
-                  _c("small", { staticClass: "left text-muted" }, [
-                    _vm._v("12:10pm"),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "text-center" }, [
-                    _vm._v(
-                      "\n                    Product name\n                 "
-                    ),
-                    _c("img", {
-                      attrs: {
-                        src: "/uploads/website/avatar-5.png",
-                        alt: "prouductImage",
-                        width: "60px;",
-                      },
-                    }),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("p", [_vm._v("Hello...")]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "sender clearfix" }, [
-              _c("span", { staticClass: "chat-img left clearfix mx-2" }),
-            ]),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-footer" }, [
-          _c("div", { staticClass: "input-group" }, [
-            _c("input", {
-              staticClass: "form-control input-sm",
-              attrs: {
-                id: "btn-input",
-                type: "text",
-                placeholder: "Type your message here...",
-              },
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "input-group-btn" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary",
-                  staticStyle: { padding: "4px 15px" },
-                },
-                [_vm._v("Send")]
-              ),
-            ]),
-          ]),
+        _c("span", { staticClass: "input-group-btn" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              staticStyle: { padding: "4px 15px" },
+            },
+            [_vm._v("Send")]
+          ),
         ]),
       ]),
     ])

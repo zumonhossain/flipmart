@@ -352,6 +352,7 @@ Route::group(['middleware' =>'auth'], function(){
     Route::post('send-message',[ChatController::class,'sendMsg'])->name('send.msg');
     Route::get('my-chat',[ChatController::class,'chatPage'])->name('chat.page');
     Route::get('/user-all',[ChatController::class,'getAllUsers'])->name('chat.users');
+    Route::get('/user-messages/{id}',[ChatController::class,'useMsgById'])->name('user.msg');
 });
 
 

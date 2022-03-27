@@ -5,22 +5,22 @@
            <strong>Chat List</strong>
            <hr>
         <li v-for="(user, index) in users" :key="index"> 
-          <a href="">
+          <a href="" @click.prevent="userMessage(user.id)">
             <img :src="'/' + user.image" alt="UserImage" class="userImg" />
             <span class="username text-center">{{ user.name }}</span>
           </a>
         </li>
       </ul>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9" v-if="allmessages.user">
       <div class="card">
         <div class="card-header text-center myrow">
-          <strong> Selected Users </strong>
+          <strong> {{ allmessages.user.name }} </strong>
         </div>
         <div class="card-body chat-msg">
-          <ul class="chat">
+          <ul class="chat" v-for="(msg, index) in allmessages.messages" :key="index">
 
-           <li class="sender clearfix">
+           <li class="sender clearfix" v-if="allmessages.user.id === msg.sender_id">
               <span class="chat-img left clearfix mx-2">
               <img src="/uploads/website/avatar-2.png"
                   class="userImg"
@@ -43,12 +43,12 @@
                   </div>
                 </div>
 
-                <p>Hi..</p>
+                <p>{{ msg.msg }}</p>
               </div>
             </li>
 
         <!-- my part  -->
-            <li class="buyer clearfix">
+            <li class="buyer clearfix" v-else>
               <span class="chat-img right clearfix mx-2">
                 <img src="/uploads/website/avatar-4.png"
                   class="userImg"
@@ -68,7 +68,7 @@
                     />
                   </div>
                 </div>
-                <p>Hello...</p>
+                <p>{{ msg.msg }}</p>
               </div>
             </li>
         
@@ -101,6 +101,7 @@
         data() {
           return {
             users: {},
+            allmessages: {},
           };
         },
 
@@ -120,6 +121,17 @@
 
               });
           },
+
+          //get Seldcted Users messages
+          userMessage(userId) {
+            axios
+              .get("/user-messages/" + userId)
+              .then((res) => {
+                this.allmessages = res.data;
+              })
+              .catch((err) => {});
+          },
+
         },
     };
 </script>

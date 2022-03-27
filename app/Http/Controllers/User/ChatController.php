@@ -44,4 +44,24 @@ class ChatController extends Controller{
 
         return $users;
     }
+
+    public function useMsgById($userId){
+        $user = User::find($userId);
+        if ($user) {
+            $messages = Message::where(function($query) use ($userId){
+                $query->where('sender_id',auth()->id());
+                $query->where('receiver_id',$userId);
+            })->orWhere(function($query) use ($userId){
+                 $query->where('sender_id',$userId);
+                 $query->where('receiver_id',auth()->id());
+            })->get();
+          
+            return response()->json([
+                'user' => $user,
+                'messages' => $messages,
+            ]);
+        }else {
+            abort(404);
+        }
+    }
 }
