@@ -27,4 +27,21 @@ class ChatController extends Controller{
     public function chatPage(){
         return view('user.chat.index');
     }
+
+    public function getAllUsers(){
+        $chats = Message::orderBy('id','DESC')
+                ->where('sender_id',auth()->id())
+                ->orWhere('receiver_id',auth()->id())
+                ->get();
+
+        $users = $chats->map(function($chat){
+            if ($chat->sender_id === auth()->id()) {
+                return $chat->receiver;
+            }
+            return $chat->sender;
+
+        })->unique();
+
+        return $users;
+    }
 }

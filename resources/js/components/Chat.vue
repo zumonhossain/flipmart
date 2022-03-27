@@ -1,22 +1,18 @@
 <template>
   <div class="row">
-    <div class="col-md-2 myUser">
+    <div class="col-md-3 myUser">
         <ul class="user">
            <strong>Chat List</strong>
            <hr>
-        <li> 
+        <li v-for="(user, index) in users" :key="index"> 
           <a href="">
-            <img src="/uploads/website/avatar-1.png"
-              alt="UserImage"
-              class="userImg"
-            />
-            <span class="username text-center">users</span>
+            <img :src="'/' + user.image" alt="UserImage" class="userImg" />
+            <span class="username text-center">{{ user.name }}</span>
           </a>
         </li>
-
       </ul>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
       <div class="card">
         <div class="card-header text-center myrow">
           <strong> Selected Users </strong>
@@ -101,110 +97,134 @@
 </template>
 
 <script>
-export default {
-   
-};
+    export default {
+        data() {
+          return {
+            users: {},
+          };
+        },
+
+        created() {
+          this.getAllUsers();
+        },
+
+        methods: {
+          //get all users
+          getAllUsers() {
+            axios
+              .get("/user-all")
+              .then((res) => {
+                this.users = res.data;
+              })
+              .catch((err) => {
+
+              });
+          },
+        },
+    };
 </script>
 <style>
-    .username {
-        color: #000;
-    }
+  .gif img {
+    width: 600px;
+  }
+  .username {
+    color: #000;
+  }
 
-    .myrow{
-        background: #F3F3F3;
-        padding: 25px;
-    }
+  .myrow {
+    background: #f3f3f3;
+    padding: 25px;
+  }
 
-    .myUser{
-        padding-top: 30px;
-        overflow-y: scroll;
-        height: 450px;
-        background: #F2F6FA;
-    }
-    .user li {
-        list-style: none;
-        margin-top: 20px;
-    
-    }
+  .myUser {
+    padding-top: 30px;
+    overflow-y: scroll;
+    height: 450px;
+    background: #f2f6fa;
+  }
+  .user li {
+    list-style: none;
+    margin-top: 20px;
+  }
 
-    .user li a:hover {
-        text-decoration: none;
-        color: red;
-    }
-    .userImg {
-        height: 35px;
-        border-radius: 50%;
-    }
-    .chat {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
+  .user li a:hover {
+    text-decoration: none;
+    color: red;
+  }
+  .userImg {
+    height: 35px;
+    border-radius: 50%;
+  }
+  .chat {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-    .chat li {
-        margin-bottom: 40px;
-        padding-bottom: 5px;
-        margin-top: 20px;
-        width: 80%;
-        height: 10px;
-    }
+  .chat li {
+    margin-bottom: 40px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    width: 80%;
+    height: 10px;
+  }
 
-    .chat li .chat-body p {
-        margin: 0;
-    }
+  .chat li .chat-body p {
+    margin: 0;
+  }
 
-    .chat-msg {
-        overflow-y: scroll;
-        height: 350px;
-        background: #F2F6FA;
-    }
-    .chat-msg .chat-img {
-        width: 50px;
-        height: 50px;
-    }
-    .chat-msg .img-circle {
-        border-radius: 50%;
-    }
-    .chat-msg .chat-img {
-        display: inline-block;
-    }
-    .chat-msg .chat-body {
-        display: inline-block;
-        max-width: 80%;
-        background-color: greenyellow;
-        border-radius: 12.5px;
-        padding: 15px;
-    }
-    .chat-msg .chat-body2 {
-        display: inline-block;
-        max-width: 80%;
-        background-color: #ccc;
-        border-radius: 12.5px;
-        padding: 15px;
-    }
-    .chat-msg .chat-body strong {
-        color: #0169da;
-    }
+  .chat-msg {
+    overflow-y: scroll;
+    height: 350px;
+    background: #f2f6fa;
+  }
+  .chat-msg .chat-img {
+    width: 50px;
+    height: 50px;
+  }
+  .chat-msg .img-circle {
+    border-radius: 50%;
+  }
+  .chat-msg .chat-img {
+    display: inline-block;
+  }
+  .chat-msg .chat-body {
+    display: inline-block;
+    max-width: 80%;
+    background-color: lightblue;
+    border-radius: 12.5px;
+    padding: 15px;
+  }
+  .chat-msg .chat-body2 {
+    display: inline-block;
+    max-width: 80%;
+    background-color: #ccc;
+    border-radius: 12.5px;
+    padding: 15px;
+  }
+  .chat-msg .chat-body strong {
+    color: #0169da;
+  }
 
-    .chat-msg .buyer {
-        text-align: right;
-        float: right;
-    }
-    .chat-msg .buyer p {
-        text-align: left;
-    }
-    .chat-msg .sender {
-        text-align: left;
-        float: left;
-    }
-    .chat-msg .left {
-        float: left;
-    }
-    .chat-msg .right {
-        float: right;
-    }
+  .chat-msg .buyer {
+    text-align: right;
+    float: right;
+  }
+  .chat-msg .buyer p {
+    text-align: left;
+  }
+  .chat-msg .sender {
+    text-align: left;
+    float: left;
+  }
+  .chat-msg .left {
+    float: left;
+  }
+  .chat-msg .right {
+    float: right;
+  }
 
-    .clearfix {
-        clear: both;
-    }
+  .clearfix {
+    clear: both;
+  }
 </style>
