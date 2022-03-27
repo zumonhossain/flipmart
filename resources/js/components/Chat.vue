@@ -66,9 +66,9 @@
           </div>
           <div class="card-footer">
             <div class="input-group">
-              <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..."/>
+              <input v-model="msg" id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..."/>
               <span class="input-group-btn">
-                <button style="padding: 4px 15px;" class="btn btn-primary">Send</button>
+                <button style="padding: 4px 15px;" class="btn btn-primary" @click.prevent="sendMsg()">Send</button>
               </span>
             </div>
           </div>
@@ -86,6 +86,8 @@
           return {
             users: {},
             allmessages: {},
+            selectedUser: "",
+            msg: "",
           };
         },
 
@@ -112,10 +114,27 @@
               .get("/user-messages/" + userId)
               .then((res) => {
                 this.allmessages = res.data;
+                this.selectedUser = userId;
               })
               .catch((err) => {});
           },
 
+          sendMsg(){
+            axios
+              .post("/send-message", {
+                  receiver_id: this.selectedUser,
+                  msg: this.msg,
+              })
+              .then((result) => {
+                  this.msg = "";
+                  this.userMessage(this.selectedUser);
+                  console.log(result.data);
+              })
+              .catch((err) => {
+                  this.errors = err.response.data.errors;
+                  
+              });
+          },
         },
     };
 </script>

@@ -5348,7 +5348,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       users: {},
-      allmessages: {}
+      allmessages: {},
+      selectedUser: "",
+      msg: ""
     };
   },
   created: function created() {
@@ -5369,7 +5371,24 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/user-messages/" + userId).then(function (res) {
         _this2.allmessages = res.data;
+        _this2.selectedUser = userId;
       })["catch"](function (err) {});
+    },
+    sendMsg: function sendMsg() {
+      var _this3 = this;
+
+      axios.post("/send-message", {
+        receiver_id: this.selectedUser,
+        msg: this.msg
+      }).then(function (result) {
+        _this3.msg = "";
+
+        _this3.userMessage(_this3.selectedUser);
+
+        console.log(result.data);
+      })["catch"](function (err) {
+        _this3.errors = err.response.data.errors;
+      });
     }
   }
 });
@@ -28870,7 +28889,52 @@ var render = function () {
               0
             ),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "card-footer" }, [
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.msg,
+                      expression: "msg",
+                    },
+                  ],
+                  staticClass: "form-control input-sm",
+                  attrs: {
+                    id: "btn-input",
+                    type: "text",
+                    placeholder: "Type your message here...",
+                  },
+                  domProps: { value: _vm.msg },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.msg = $event.target.value
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "input-group-btn" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      staticStyle: { padding: "4px 15px" },
+                      on: {
+                        click: function ($event) {
+                          $event.preventDefault()
+                          return _vm.sendMsg()
+                        },
+                      },
+                    },
+                    [_vm._v("Send")]
+                  ),
+                ]),
+              ]),
+            ]),
           ]),
         ])
       : _c("div", { staticClass: "col-md-3 gif" }, [
@@ -28892,34 +28956,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "sender clearfix" }, [
       _c("span", { staticClass: "chat-img left clearfix mx-2" }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c("div", { staticClass: "input-group" }, [
-        _c("input", {
-          staticClass: "form-control input-sm",
-          attrs: {
-            id: "btn-input",
-            type: "text",
-            placeholder: "Type your message here...",
-          },
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "input-group-btn" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              staticStyle: { padding: "4px 15px" },
-            },
-            [_vm._v("Send")]
-          ),
-        ]),
-      ]),
     ])
   },
 ]
