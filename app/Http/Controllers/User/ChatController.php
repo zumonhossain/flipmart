@@ -54,7 +54,7 @@ class ChatController extends Controller{
             })->orWhere(function($query) use ($userId){
                  $query->where('sender_id',$userId);
                  $query->where('receiver_id',auth()->id());
-            })->get();
+            })->with(['user','product'])->get();
           
             return response()->json([
                 'user' => $user,

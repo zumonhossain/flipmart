@@ -13,85 +13,69 @@
       </ul>
     </div>
     <div class="col-md-9" v-if="allmessages.user">
-      <div class="card">
-        <div class="card-header text-center myrow">
-          <strong> {{ allmessages.user.name }} </strong>
-        </div>
-        <div class="card-body chat-msg">
-          <ul class="chat" v-for="(msg, index) in allmessages.messages" :key="index">
+        <div class="card">
+          <div class="card-header text-center myrow">
+            <strong> {{ allmessages.user.name }} </strong>
+          </div>
+          <div class="card-body chat-msg">
+            <ul class="chat" v-for="(msg, index) in allmessages.messages" :key="index">
 
-           <li class="sender clearfix" v-if="allmessages.user.id === msg.sender_id">
-              <span class="chat-img left clearfix mx-2">
-              <img src="/uploads/website/avatar-2.png"
-                  class="userImg"
-                  alt="userImg"
-                />
+            <li class="sender clearfix" v-if="allmessages.user.id === msg.sender_id">
+                <span class="chat-img left clearfix mx-2">
+                <img :src="'/' + msg.user.image" class="userImg" alt="userImg"/>
+                </span>
+                <div class="chat-body2 clearfix">
+                  <div class="header clearfix">
+                    <strong class="primary-font">{{ msg.user.name }}</strong>
+                    <small class="right text-muted">
+                      {{ msg.created_at }}
+                    </small>
+                    <!-- //if send with product id  -->
+                    <div class="text-center" v-if="msg.product">
+                        {{ msg.product.product_name }}
+                        <img :src="'/' + msg.product.product_thambnail" alt="productImg" width="60px;"/>
+                    </div>
+                  </div>
+
+                  <p>{{ msg.msg }}</p>
+                </div>
+              </li>
+
+          <!-- my part  -->
+              <li class="buyer clearfix" v-else>
+                <span class="chat-img right clearfix mx-2">
+                  <img :src="'/' + msg.user.image" class="userImg" alt="userImg"/>
+                  </span>
+                <div class="chat-body clearfix">
+                  <div class="header clearfix">
+                    <small class="left text-muted">{{ msg.created_at }}</small>
+                    <div class="text-center" v-if="msg.product">
+                        {{ msg.product.product_name }}
+                        <img :src="'/' + msg.product.product_thambnail" alt="prouductImage" width="60px;"/>
+                    </div>
+                  </div>
+                  <p>{{ msg.msg }}</p>
+                </div>
+              </li>
+          
+              <li class="sender clearfix">
+                <span class="chat-img left clearfix mx-2"> </span>
+              </li>
+
+            </ul>
+          </div>
+          <div class="card-footer">
+            <div class="input-group">
+              <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..."/>
+              <span class="input-group-btn">
+                <button style="padding: 4px 15px;" class="btn btn-primary">Send</button>
               </span>
-              <div class="chat-body2 clearfix">
-                <div class="header clearfix">
-                  <strong class="primary-font">Username1</strong>
-                  <small class="right text-muted">
-                    11:30am 
-                  </small>
-                  <!-- //if send with product id  -->
-                  <div class="text-center">
-                      product name
-                  <img src="/uploads/website/avatar-3.png"
-                      alt="productImg"
-                      width="60px;"
-                    />
-                  </div>
-                </div>
-
-                <p>{{ msg.msg }}</p>
-              </div>
-            </li>
-
-        <!-- my part  -->
-            <li class="buyer clearfix" v-else>
-              <span class="chat-img right clearfix mx-2">
-                <img src="/uploads/website/avatar-4.png"
-                  class="userImg"
-                  alt="userImg"
-                />
-                 </span>
-              <div class="chat-body clearfix">
-                <div class="header clearfix">
-                  <small class="left text-muted"
-                    >12:10pm</small>
-                  <!-- <strong class="right primary-font">Myusername </strong> //my name   -->
-                   <div class="text-center">
-                      Product name
-                   <img src="/uploads/website/avatar-5.png"
-                      alt="prouductImage"
-                      width="60px;"
-                    />
-                  </div>
-                </div>
-                <p>{{ msg.msg }}</p>
-              </div>
-            </li>
-        
-            <li class="sender clearfix">
-              <span class="chat-img left clearfix mx-2"> </span>
-            </li>
-
-          </ul>
-        </div>
-        <div class="card-footer">
-          <div class="input-group">
-            <input
-              id="btn-input"
-              type="text"
-              class="form-control input-sm"
-              placeholder="Type your message here..."
-            />
-            <span class="input-group-btn">
-              <button style="padding: 4px 15px;" class="btn btn-primary">Send</button>
-            </span>
+            </div>
           </div>
         </div>
-      </div>
+    </div>
+    <div class="col-md-3 gif" v-else>
+        <img width="540" height="450" src="/uploads/website/preview.gif" alt="userImg" />
     </div>
   </div>
 </template>
@@ -136,9 +120,6 @@
     };
 </script>
 <style>
-  .gif img {
-    width: 600px;
-  }
   .username {
     color: #000;
   }

@@ -18,5 +18,12 @@ class Message extends Model{
         return $this->belongsTo(User::class,'receiver_id');
     }
     
+    public function user(){
+        return $this->belongsTo(User::class,'sender_id'); //user_id
+    }
+  
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
 
 }
