@@ -8,6 +8,7 @@ use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\ProductReviewController;
 use App\Http\Controllers\User\ChatController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\GeneralController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -54,6 +55,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // ================= Admin Routes ======================
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth','permission']], function(){
     route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+
+    // Basic
+    Route::get('general/basic', [GeneralController::class, 'basic'])->name('basic');
+    Route::post('general/basic/update', [GeneralController::class, 'update_basic']);
     
     //My Profile routes
     route::get('my/profile',[AdminController::class,'profile'])->name('my.profile');

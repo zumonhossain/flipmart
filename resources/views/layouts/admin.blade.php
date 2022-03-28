@@ -198,6 +198,12 @@
                         <li> 
                             <a class="waves-effect waves-dark" href="{{ url('admin/dashboard') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
+                        <li> 
+                            <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-table"></i><span class="hide-menu">General</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{ route('basic') }}">Basic</a></li>
+                            </ul>
+                        </li>
                         @isset(auth()->user()->role->permission['permission']['user']['list'])
                             <li> 
                                 <a class="waves-effect waves-dark" href="{{ url('admin/all-users') }}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">All Users</span></a>
