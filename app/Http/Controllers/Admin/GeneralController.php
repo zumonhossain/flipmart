@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\SocialMedia;
 use App\Models\Basic;
 use Carbon\Carbon;
 use Session;
@@ -64,5 +65,42 @@ class GeneralController extends Controller{
             'alert-type'=>'success',
         );
         return redirect()->route('basic')->with($notification);
+    }
+
+    //========================== Social Media Information ==========================
+
+    public function social(){
+        $data=SocialMedia::where('sm_status',1)->where('id',1)->firstOrFail();
+        return view('admin.general.social',compact('data'));
+    }
+
+    public function update_social(Request $request){
+        $this->validate($request,[
+            'facebook'=>'required',
+            'twitter'=>'required',
+        ],[
+            'facebook.required'=>'please enter facebook link!',
+            'twitter.required'=>'please enter twitter!',
+        ]);
+
+        SocialMedia::where('sm_status',1)->where('id',1)->update([
+            'sm_facebook'=>$request['facebook'],
+            'sm_twitter'=>$request['twitter'],
+            'sm_linkedin'=>$request['linkedin'],
+            'sm_instagram'=>$request['instagram'],
+            'sm_pinterest'=>$request['pinterest'],
+            'sm_skype'=>$request['skype'],
+            'sm_youtube'=>$request['youtube'],
+            'sm_google'=>$request['google'],
+            'sm_vimeo'=>$request['vimeo'],
+            'sm_whatsapp'=>$request['whatsapp'],
+            'updated_at'=>Carbon::now()->toDateTimeString(),
+        ]);
+
+        $notification=array(
+            'messege'=>'Social Media Update Success!',
+            'alert-type'=>'success',
+        );
+        return redirect()->route('social.media')->with($notification);
     }
 }
