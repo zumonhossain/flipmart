@@ -203,6 +203,7 @@
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('basic') }}">Basic</a></li>
                                 <li><a href="{{ route('social.media') }}">Social Media</a></li>
+                                <li><a href="{{ route('contact.information') }}">Contact Information</a></li>
                             </ul>
                         </li>
                         @isset(auth()->user()->role->permission['permission']['user']['list'])

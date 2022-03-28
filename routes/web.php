@@ -62,6 +62,9 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth','permission']], fu
     // Social Media
     Route::get('general/social', [GeneralController::class, 'social'])->name('social.media');
     Route::post('general/social/update', [GeneralController::class, 'update_social']);
+    // Contact Information
+    Route::get('general/contactinformation', [GeneralController::class, 'contactinformation'])->name('contact.information');
+    Route::post('general/contactinformation/update', [GeneralController::class, 'update_contactinformation']);
     
     //My Profile routes
     route::get('my/profile',[AdminController::class,'profile'])->name('my.profile');

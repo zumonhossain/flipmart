@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\ContactInformation;
 use App\Models\SocialMedia;
 use App\Models\Basic;
 use Carbon\Carbon;
@@ -102,5 +103,44 @@ class GeneralController extends Controller{
             'alert-type'=>'success',
         );
         return redirect()->route('social.media')->with($notification);
+    }
+
+    //========================== Contact Information ==========================
+
+    public function contactinformation(){
+        $data=ContactInformation::where('ci_status',1)->where('id',1)->firstOrFail();
+        return view('admin.general.contactinformation',compact('data'));
+    }
+
+    public function update_contactinformation(Request $request){
+        $this->validate($request,[
+            'phone1'=>'required',
+            'phone2'=>'required',
+        ],[
+            'phone1.required'=>'please enter phone number 1!',
+            'phone2.required'=>'please enter phone number 2!',
+        ]);
+        
+        ContactInformation::where('ci_status',1)->where('id',1)->update([
+            'ci_phone1'=>$request['phone1'],
+            'ci_phone2'=>$request['phone2'],
+            'ci_phone3'=>$request['phone3'],
+            'ci_phone4'=>$request['phone4'],
+            'ci_email1'=>$request['email1'],
+            'ci_email2'=>$request['email2'],
+            'ci_email3'=>$request['email3'],
+            'ci_email4'=>$request['email4'],
+            'ci_add1'=>$request['add1'],
+            'ci_add2'=>$request['add2'],
+            'ci_add3'=>$request['add3'],
+            'ci_add4'=>$request['add4'],
+            'updated_at'=>Carbon::now()->toDateTimeString(),
+        ]);
+
+        $notification=array(
+            'messege'=>'Contact Information Update Success!',
+            'alert-type'=>'success',
+        );
+        return redirect()->route('contact.information')->with($notification);
     }
 }
