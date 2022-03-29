@@ -41,7 +41,7 @@ class ShopController extends Controller{
         }
 
         else{
-            $products = $products->where('product_status',1)->orderBy('id','DESC')->paginate(3);
+            $products = $products->where('product_status',1)->orderBy('id','DESC')->paginate(12);
         }
         
         $categories = Category::orderBy('category_name','ASC')->get();

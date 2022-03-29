@@ -7,7 +7,7 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li class='active'>Handbags</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
@@ -101,21 +101,17 @@
                                 </div><!-- /.filter-tabs -->
                             </div><!-- /.col -->
                             <div class="col col-sm-12 col-md-6">
-                                <div class="col col-sm-3 col-md-6 no-padding">
+                                <div class="col col-sm-12 col-md-12 no-padding">
                                     <div class="lbl-cnt">
-                                        <span class="lbl">Sort by</span>
                                         <div class="fld inline">
                                             <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                                                <button data-toggle="dropdown" type="button" class="btn dropdown-toggle">
-                                                    Position <span class="caret"></span>
-                                                </button>
-
-                                                <ul role="menu" class="dropdown-menu">
-                                                    <li role="presentation"><a href="#">position</a></li>
-                                                    <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                                                    <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                                                    <li role="presentation"><a href="#">Product Name:A to Z</a></li>
-                                                </ul>
+                                                <select class="form-control" name="" id="sortBy">
+                                                    <option>Sort By Products</option>
+                                                    <option value="priceLowtoHigh"{{ $sort == 'priceLowtoHigh' ? 'selected' : '' }}>Price:Lower to Higher</option>
+                                                    <option value="priceHightoLow"{{ $sort == 'priceHightoLow' ? 'selected' : '' }}>Price:Higher to Lower</option>
+                                                    <option value="nameAtoZ"{{ $sort == 'nameAtoZ' ? 'selected' : '' }}>Product Name:A to Z</option>
+                                                    <option value="nameZtoA"{{ $sort == 'nameZtoA' ? 'selected' : '' }}>Product Name:Z to A</option>
+                                                </select>
                                             </div>
                                         </div><!-- /.fld -->
                                     </div><!-- /.lbl-cnt -->
@@ -288,18 +284,7 @@
                             </div><!-- /.tab-pane #list-container -->
                         </div><!-- /.tab-content -->
                         <div class="clearfix filters-container">
-                            <div class="text-right">
-                                <div class="pagination-container">
-                                    <ul class="list-inline list-unstyled">
-                                        <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                        <li><a href="#">1</a></li>	
-                                        <li class="active"><a href="#">2</a></li>	
-                                        <li><a href="#">3</a></li>	
-                                        <li><a href="#">4</a></li>	
-                                        <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                    </ul><!-- /.list-inline -->
-                                </div><!-- /.pagination-container -->				
-                            </div><!-- /.text-right -->
+                            {{ $products->appends($_GET)->links('vendor.pagination.custom') }}
                         </div><!-- /.filters-container -->
                     </div><!-- /.search-result-container -->
                 </div><!-- /.col -->
@@ -309,4 +294,15 @@
             <!-- ========= BRANDS CAROUSEL END =========== -->
         </div><!-- /.container -->
     </div><!-- /.body-content -->
+
+    @section('scripts')
+    <script>
+        $('#sortBy').change(function(e) {
+            e.preventDefault();
+            let sortBy = $('#sortBy').val();
+            
+            window.location = "{{ url('' . $route . '') }}/{{ $subsubCatId }}/{{ $subsubCatSlug }}?sort=" +sortBy;
+
+        });
+    </script>
 @endsection

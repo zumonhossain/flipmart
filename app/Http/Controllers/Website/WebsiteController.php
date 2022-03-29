@@ -98,13 +98,37 @@ class WebsiteController extends Controller{
 
         return view('website.sub-category-product',compact('products','categories','route','subCatSlug','subCatId','sort'));
     }
-    //subsubcatgory wise product show
-    public function subSubCatWiseProduct($subsubcat_id,$slug){
+    //sub subcatgory wise product show
+    public function subSubCatWiseProduct(Request $request,$subsubcat_id,$slug){
         $products = Product::where('product_status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(12);
         $categories = Category::orderBy('category_name','ASC')->get();
 
+        $sort = '';
+        if ($request->sort != null) {
+            $sort = $request->sort;
+        }
 
-        return view('website.sub-sub-category-product',compact('products','categories'));
+        if ($subsubcat_id == null) {
+            return view('errors.404');
+        }else {
+            if ($sort == 'priceLowtoHigh') {
+                $products = Product::where(['product_status' => 1,'subsubcategory_id' => $subsubcat_id])->orderBy('selling_price','ASC')->paginate(12);
+            }elseif ($sort == 'priceHightoLow') {
+                $products = Product::where(['product_status' => 1,'subsubcategory_id' => $subsubcat_id])->orderBy('selling_price','DESC')->paginate(12);
+            }elseif ($sort == 'nameAtoZ') {
+                $products = Product::where(['product_status' => 1,'subsubcategory_id' => $subsubcat_id])->orderBy('product_name','ASC')->paginate(12);
+            }elseif ($sort == 'nameZtoA') {
+                $products = Product::where(['product_status' => 1,'subsubcategory_id' => $subsubcat_id])->orderBy('product_name','DESC')->paginate(12);
+            }else {
+                $products = Product::where('product_status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(12);
+            }
+        }
+
+        $subsubCatId = $subsubcat_id;
+        $subsubCatSlug = $slug;
+        $route = 'sub/subcategory/product';
+
+        return view('website.sub-sub-category-product',compact('products','categories','route','subsubCatSlug','subsubCatId','sort'));
     }
 
     // =========================== Product view with ajax================

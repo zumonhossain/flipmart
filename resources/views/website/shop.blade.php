@@ -7,7 +7,7 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li class='active'>Shop By Category</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
@@ -198,7 +198,24 @@
                                                             </div><!-- /.product-image -->
                                                             <div class="product-info text-left">
                                                                 <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></h3>
-                                                                <div class="rating rateit-small"></div>
+                                                                
+                                                                @if (App\Models\ProductReview::where('product_id', $product->id)->first())
+                                                                    @php
+                                                                        $reviewProducts = App\Models\ProductReview::where('product_id', $product->id)->where('status','approve')->latest()->get();
+                                                                        $rating = App\Models\ProductReview::where('product_id', $product->id)->where('status','approve')->avg('rating');
+                                                                        $avgRating = number_format($rating,1);
+                                                                    @endphp
+
+                                                                    @for ($i = 1; $i <= 5; $i++)
+                                                                        <span style="color: #fdd922" class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}"></span>
+                                                                    @endfor
+
+                                                                    ({{ count($reviewProducts) }})
+                                                                    
+                                                                @else
+                                                                    <span class="text-danger">No Review</span>
+                                                                @endif
+
                                                                 <div class="description"></div>
                                                                 <div class="product-price">	
                                                                     <span class="price">${{ $product->selling_price }}</span>
@@ -248,7 +265,24 @@
                                                             <div class="col col-sm-8 col-lg-8">
                                                                 <div class="product-info">
                                                                     <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></h3>
-                                                                    <div class="rating rateit-small"></div>
+                                                                    
+                                                                    @if (App\Models\ProductReview::where('product_id', $product->id)->first())
+                                                                        @php
+                                                                            $reviewProducts = App\Models\ProductReview::where('product_id', $product->id)->where('status','approve')->latest()->get();
+                                                                            $rating = App\Models\ProductReview::where('product_id', $product->id)->where('status','approve')->avg('rating');
+                                                                            $avgRating = number_format($rating,1);
+                                                                        @endphp
+
+                                                                        @for ($i = 1; $i <= 5; $i++)
+                                                                            <span style="color: #fdd922" class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}"></span>
+                                                                        @endfor
+
+                                                                        ({{ count($reviewProducts) }})
+                                                                        
+                                                                    @else
+                                                                        <span class="text-danger">No Review</span>
+                                                                    @endif
+
                                                                     <div class="product-price">	
                                                                         <span class="price">${{ $product->selling_price }}</span>
                                                                         <span class="price-before-discount">${{ $product->discount_price }}</span>						
@@ -260,21 +294,13 @@
                                                                         <div class="action">
                                                                             <ul class="list-unstyled">
                                                                                 <li class="add-cart-button btn-group">
-                                                                                    <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                                                                        <i class="fa fa-shopping-cart"></i>													
-                                                                                    </button>
-                                                                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>					
+                                                                                    <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#cartModal"  id="{{ $product->id }}" onclick="productView(this.id)">
+                                                                                        <i class="fa fa-shopping-cart"></i>					
+                                                                                    </button>					
                                                                                 </li>
-                                                                                <li class="lnk wishlist">
-                                                                                    <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                                                        <i class="icon fa fa-heart"></i>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li class="lnk">
-                                                                                    <a class="add-to-cart" href="detail.html" title="Compare">
-                                                                                        <i class="fa fa-signal"></i>
-                                                                                    </a>
-                                                                                </li>
+                                                                                <button class="btn btn-primary icon" type="button" title="Add to WIshlist" id="{{ $product->id }}" onclick="addToWishlist(this.id)">
+                                                                                    <i class="icon fa fa-heart"></i>
+                                                                                </button>
                                                                             </ul>
                                                                         </div><!-- /.action -->
                                                                     </div><!-- /.cart -->	

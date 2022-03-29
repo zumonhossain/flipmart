@@ -7,7 +7,7 @@
         <div class="container">
             <div class="breadcrumb-inner">
                 <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                     <li class='active'>Handbags</li>
                 </ul>
             </div><!-- /.breadcrumb-inner -->
@@ -115,6 +115,9 @@
                                 </div><!-- /.category-product -->
                             </div><!-- /.tab-pane #list-container -->
                         </div><!-- /.tab-content -->
+                        <div class="clearfix filters-container">
+                            {{ $products->appends($_GET)->links('vendor.pagination.custom') }}
+                        </div><!-- /.filters-container -->
                     </div><!-- /.search-result-container -->
                 </div><!-- /.col -->
 
