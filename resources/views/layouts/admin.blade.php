@@ -199,6 +199,16 @@
                             <a class="waves-effect waves-dark" href="{{ url('admin/dashboard') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
                         </li>
                         <li> 
+                            <a class="waves-effect waves-dark" target="_blank" href="{{ url('/') }}" aria-expanded="false"><i class="mdi mdi-web"></i><span class="hide-menu">Live Site</span></a>
+                        </li>
+                        
+                        @isset(auth()->user()->role->permission['permission']['user']['list'])
+                            <li> 
+                                <a class="waves-effect waves-dark" href="{{ url('admin/all-users') }}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">All Users</span></a>
+                            </li>
+                        @endisset
+
+                        <li> 
                             <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-settings"></i><span class="hide-menu">General</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{ route('basic') }}">Basic</a></li>
@@ -206,11 +216,6 @@
                                 <li><a href="{{ route('contact.information') }}">Contact Information</a></li>
                             </ul>
                         </li>
-                        @isset(auth()->user()->role->permission['permission']['user']['list'])
-                            <li> 
-                                <a class="waves-effect waves-dark" href="{{ url('admin/all-users') }}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">All Users</span></a>
-                            </li>
-                        @endisset
 
                         @isset(auth()->user()->role->permission['permission']['banner']['list'])
                             <li>

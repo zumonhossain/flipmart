@@ -12,7 +12,14 @@
 
 		@yield('meta')
 		
+		@php
+            $basic = App\Models\Basic::where('basic_status',1)->firstOrFail();
+            $social = App\Models\SocialMedia::where('sm_status',1)->firstOrFail();
+            $contactInfo=App\Models\ContactInformation::where('ci_status',1)->firstOrFail();
+        @endphp
+
 	    <title>@yield('title')</title>
+		<link rel="shortcut icon" type="image/x-icon" href="{{asset('uploads/basic/'.$basic->basic_favicon)}}">
 	    <link rel="stylesheet" href="{{ asset('contents/website') }}/assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="{{ asset('contents/website') }}/assets/css/main.css">
 	    <link rel="stylesheet" href="{{ asset('contents/website') }}/assets/css/blue.css">
@@ -122,7 +129,7 @@
 							<!-- ============== LOGO =================== -->
 							<div class="logo">
 								<a href="{{ url('/') }}">
-									<img src="{{ asset('contents/website') }}/assets/images/logo.png" alt="">
+									<img src="{{ asset('uploads/basic/'.$basic->basic_logo) }}" alt="">
 								</a>
 							</div>
 							<!-- ================== LOGO : END =================== -->				
@@ -293,7 +300,7 @@
 											</span>
 										</div>
 										<div class="media-body">
-											<p>ThemesGround, 789 Main rd, Anytown, CA 12345 USA</p>
+											<p>{{ $contactInfo->ci_add1 }}</p>
 										</div>
 									</li>
 
@@ -304,7 +311,7 @@
 											</span>
 										</div>
 										<div class="media-body">
-											<p>+(888) 123-4567<br>+(888) 456-7890</p>
+											<p>{{ $contactInfo->ci_phone1 }}<br>{{ $contactInfo->ci_phone2 }}</p>
 										</div>
 									</li>
 
@@ -315,7 +322,7 @@
 											</span>
 										</div>
 										<div class="media-body">
-											<span><a href="#">flipmart@themesground.com</a></span>
+											<span><a href="#">{{ $contactInfo->ci_email1 }}</a></span>
 										</div>
 									</li>
 								</ul>
@@ -371,13 +378,12 @@
 				<div class="container">
 					<div class="col-xs-12 col-sm-6 no-padding social">
 						<ul class="link">
-						<li class="fb pull-left"><a target="_blank" rel="nofollow" href="#" title="Facebook"></a></li>
-						<li class="tw pull-left"><a target="_blank" rel="nofollow" href="#" title="Twitter"></a></li>
-						<li class="googleplus pull-left"><a target="_blank" rel="nofollow" href="#" title="GooglePlus"></a></li>
-						<li class="rss pull-left"><a target="_blank" rel="nofollow" href="#" title="RSS"></a></li>
-						<li class="pintrest pull-left"><a target="_blank" rel="nofollow" href="#" title="PInterest"></a></li>
-						<li class="linkedin pull-left"><a target="_blank" rel="nofollow" href="#" title="Linkedin"></a></li>
-						<li class="youtube pull-left"><a target="_blank" rel="nofollow" href="#" title="Youtube"></a></li>
+						<li class="fb pull-left"><a target="_blank" rel="nofollow" href="{{ $social->sm_facebook }}" title="Facebook"></a></li>
+						<li class="tw pull-left"><a target="_blank" rel="nofollow" href="{{ $social->sm_twitter }}" title="Twitter"></a></li>
+						<li class="googleplus pull-left"><a target="_blank" rel="nofollow" href="{{ $social->sm_google }}" title="GooglePlus"></a></li>
+						<li class="pintrest pull-left"><a target="_blank" rel="nofollow" href="{{ $social->sm_pInterest }}" title="PInterest"></a></li>
+						<li class="linkedin pull-left"><a target="_blank" rel="nofollow" href="{{ $social->sm_linkedin }}" title="Linkedin"></a></li>
+						<li class="youtube pull-left"><a target="_blank" rel="nofollow" href="{{ $social->sm_youtube }}" title="Youtube"></a></li>
 						</ul>
 					</div>
 					<div class="col-xs-12 col-sm-6 no-padding">

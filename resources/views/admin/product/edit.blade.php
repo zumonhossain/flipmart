@@ -114,20 +114,14 @@
                             </div> 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="form-control-label">Product Size<span class="require_star">*</span></label>
+                                    <label class="form-control-label">Product Size</label>
                                     <input class="form-control" type="text" name="product_size" value="{{ $product->product_size }}"  data-role="tagsinput"><br>
-                                    @error('product_size')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                             </div> 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label class="form-control-label">Product Color<span class="require_star">*</span></label>
+                                    <label class="form-control-label">Product Color</label>
                                     <input class="form-control" type="text" name="product_color" value="{{ $product->product_color }}" data-role="tagsinput"><br>
-                                    @error('product_color')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                             </div> 
                             <div class="col-md-4">

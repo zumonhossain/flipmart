@@ -140,10 +140,6 @@
 
 					@include('website.includes.best-seller')
 
-					@include('website.includes.blog-slider')
-
-					@include('website.includes.new-arrivals')
-
 				</div>
 			</div>
 
