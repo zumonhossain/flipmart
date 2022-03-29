@@ -294,8 +294,9 @@
             <!-- ========= BRANDS CAROUSEL END =========== -->
         </div><!-- /.container -->
     </div><!-- /.body-content -->
+@endsection
 
-    @section('scripts')
+@section('scripts')
     <script>
         $('#sortBy').change(function(e) {
             e.preventDefault();
