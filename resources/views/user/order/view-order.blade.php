@@ -96,7 +96,7 @@
                             </div>
 
                             <div class="mt-3">
-                                <div class="col-md-12 m-auto">
+                                <div class="col-md-12">
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
@@ -166,21 +166,23 @@
 
                             @else
 
-                                @php
-                                    $order = App\Models\Order::where('id',$order->id)->where('return_reason','=',NULL)->first();
-                                @endphp
+                                <div class="col-md-12">
+                                    @php
+                                        $order = App\Models\Order::where('id',$order->id)->where('return_reason','=',NULL)->first();
+                                    @endphp
 
-                                @if ($order)
-                                    <form action="{{ route('user-return-order') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $order->id }}">
-                                        <div class="form-group">
-                                            <label for="label">Do You want To Return This Order?:</label>
-                                            <textarea name="return_reason" id="label"  class="form-control" cols="30" rows="05" placeholder="Return Reason"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-sm btn-danger">Submit</button>
-                                    </form>
-                                @endif
+                                    @if ($order)
+                                        <form action="{{ route('user-return-order') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $order->id }}">
+                                            <div class="form-group">
+                                                <label for="label">Do You want To Return This Order?:</label>
+                                                <textarea name="return_reason" id="label"  class="form-control" cols="30" rows="05" placeholder="Return Reason"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-sm btn-danger">Submit</button>
+                                        </form>
+                                    @endif
+                                </div>
                                 
                             @endif
                         </div>

@@ -156,7 +156,7 @@
                                         <hr>
                                             <li>
                                                 <input type="radio" name="payment_method" value="stripe">
-                                                <label for="">Stripe</label>
+                                                <img src="{{ asset('contents/website') }}/assets/images/visa.webp" alt="" width="35" height="">
                                             </li>
                                             
                                             <li>
