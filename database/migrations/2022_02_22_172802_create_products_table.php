@@ -35,6 +35,7 @@ class CreateProductsTable extends Migration
             $table->integer('featured')->nullable();
             $table->integer('special_offer')->nullable();
             $table->integer('special_deals')->nullable();
+            $table->integer('best_seller')->nullable();
             $table->string('product_slug',50)->nullable();
             $table->integer('product_creator')->nullable();
             $table->integer('product_status')->default(1);

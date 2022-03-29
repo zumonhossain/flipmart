@@ -200,6 +200,12 @@
                                     <label class="form-check-label" for="exampleCheck4">Special Deals</label>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input type="checkbox" name="best_seller" class="form-check-input" id="exampleCheck5" value="1">
+                                    <label class="form-check-label" for="exampleCheck5">Best Seller</label>
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <div class="text-center mt-5">
                                     <button type="submit" class="btn btn-dark registration-btn ">Save</button>

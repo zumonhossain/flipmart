@@ -13,7 +13,24 @@
                     <div class="col col-sm-8 col-lg-8">
                         <div class="product-info">
                             <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></h3>
-                            <div class="rating rateit-small"></div>
+
+                            @if (App\Models\ProductReview::where('product_id', $product->id)->first())
+								@php
+									$reviewProducts = App\Models\ProductReview::where('product_id', $product->id)->where('status','approve')->latest()->get();
+									$rating = App\Models\ProductReview::where('product_id', $product->id)->where('status','approve')->avg('rating');
+									$avgRating = number_format($rating,1);
+								@endphp
+
+								@for ($i = 1; $i <= 5; $i++)
+									<span style="color: #fdd922" class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}"></span>
+								@endfor
+
+								({{ count($reviewProducts) }})
+								
+							@else
+								<span class="text-danger">No Review</span>
+							@endif
+                            
                             <div class="product-price">	
                                 <span class="price">${{ $product->selling_price }}</span>
                                 <span class="price-before-discount">${{ $product->discount_price }}</span>						

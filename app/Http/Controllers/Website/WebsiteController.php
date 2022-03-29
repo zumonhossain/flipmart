@@ -16,6 +16,7 @@ class WebsiteController extends Controller{
     public function index(){
         $products = Product::where('product_status',1)->orderBy('id','DESC')->get();
         $featureds = Product::where('featured',1)->where('product_status',1)->orderBy('id','DESC')->get();
+        $best_sellers = Product::where('best_seller',1)->where('product_status',1)->orderBy('id','DESC')->get();
         $special_offers = Product::where('special_offer',1)->where('product_status',1)->orderBy('id','DESC')->limit(5)->get();
         $special_deals = Product::where('special_deals',1)->where('product_status',1)->orderBy('id','DESC')->limit(5)->get();
 
@@ -28,7 +29,7 @@ class WebsiteController extends Controller{
         $skip_product_2 = Product::where('product_status',1)->where('category_id',$skip_category_2->id)->orderBY('id','DESC')->get();
         $skip_product_brand_0 = Product::where('product_status',1)->where('brand_Id',$skip_brand_0->id)->orderBY('id','DESC')->get();
 
-        return view('website.home.home',compact('products','featureds','special_offers','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_category_2','skip_product_2','skip_product_0','skip_product_brand_0','skip_brand_0'));
+        return view('website.home.home',compact('products','featureds','best_sellers','special_offers','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_category_2','skip_product_2','skip_product_0','skip_product_brand_0','skip_brand_0'));
     }
 
     public function productDetails($id,$slug){

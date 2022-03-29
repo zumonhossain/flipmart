@@ -181,6 +181,12 @@
                                     <label class="form-check-label" for="exampleCheck4">Special Deals</label>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input type="checkbox" name="best_seller" class="form-check-input" id="exampleCheck5" value="1" {{ $product->best_seller == 1 ? 'checked': '' }}>
+                                    <label class="form-check-label" for="exampleCheck5">Best Seller</label>
+                                </div>
+                            </div>
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <div class="mt-5 mb-2">

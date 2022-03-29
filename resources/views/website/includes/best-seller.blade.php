@@ -2,266 +2,56 @@
 	<h3 class="section-title">Best seller</h3>
 	<div class="sidebar-widget-body outer-top-xs">
 		<div class="owl-carousel best-seller custom-carousel owl-theme outer-top-xs">
-	        	        <div class="item">
-	        	<div class="products best-product">
-		        							<div class="product">
+			@foreach($featureds as $product)
+				<div class="item">
+					<div class="products best-product">
+						<div class="product">
 							<div class="product-micro">
-	<div class="row product-micro-row">
-		<div class="col col-xs-5">
-			<div class="product-image">
-				<div class="image">
-					<a href="#">
-						<img src="{{ asset('contents/website') }}/assets/images/products/p20.jpg" alt="">
-					</a>					
-				</div><!-- /.image -->
-					
-											
-					
-								</div><!-- /.product-image -->
-		</div><!-- /.col -->
-		<div class="col2 col-xs-7">
-			<div class="product-info">
-				<h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-				<div class="rating rateit-small"></div>
-				<div class="product-price">	
-				<span class="price">
-					$450.99				</span>
-				
-			</div><!-- /.product-price -->
-			
-			</div>
-		</div><!-- /.col -->
-	</div><!-- /.product-micro-row -->
-</div><!-- /.product-micro -->
-      
+								<div class="row product-micro-row">
+									<div class="col col-xs-5">
+										<div class="product-image">
+											<div class="image">
+												<a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}"><img src="{{ asset($product->product_thambnail) }}" alt=""></a>					
+											</div><!-- /.image -->
+										</div><!-- /.product-image -->
+									</div><!-- /.col -->
+									<div class="col2 col-xs-7">
+										<div class="product-info">
+											<h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></h3>
+
+											@if (App\Models\ProductReview::where('product_id', $product->id)->first())
+												@php
+													$reviewProducts = App\Models\ProductReview::where('product_id', $product->id)->where('status','approve')->latest()->get();
+													$rating = App\Models\ProductReview::where('product_id', $product->id)->where('status','approve')->avg('rating');
+													$avgRating = number_format($rating,1);
+												@endphp
+
+												@for ($i = 1; $i <= 5; $i++)
+													<span style="color: #fdd922" class="glyphicon glyphicon-star{{ $i <= $avgRating ? '' : '-empty' }}"></span>
+												@endfor
+
+												({{ count($reviewProducts) }})
+												
+											@else
+												<span class="text-danger">No Review</span>
+											@endif
+
+											<div class="product-price">	
+												@if ($product->discount_price == NULL)
+													<span class="price">${{ $product->selling_price }}</span>
+												@else
+													<span class="price">${{ $product->discount_price }}</span>
+													<span class="price-before-discount">${{ $product->selling_price }}</span>
+												@endif	
+											</div><!-- /.product-price -->
+										</div>
+									</div><!-- /.col -->
+								</div><!-- /.product-micro-row -->
+							</div><!-- /.product-micro -->
 						</div>
-		        							<div class="product">
-							<div class="product-micro">
-	<div class="row product-micro-row">
-		<div class="col col-xs-5">
-			<div class="product-image">
-				<div class="image">
-					<a href="#">
-						<img src="{{ asset('contents/website') }}/assets/images/products/p21.jpg" alt="">
-					</a>					
-				</div><!-- /.image -->
-					
-					
-								</div><!-- /.product-image -->
-		</div><!-- /.col -->
-		<div class="col2 col-xs-7">
-			<div class="product-info">
-				<h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-				<div class="rating rateit-small"></div>
-				<div class="product-price">	
-				<span class="price">
-					$450.99				</span>
-				
-			</div><!-- /.product-price -->
-			
-			</div>
-		</div><!-- /.col -->
-	</div><!-- /.product-micro-row -->
-</div><!-- /.product-micro -->
-      
-						</div>
-		        		        	</div>
-	        </div>
-	    		        <div class="item">
-	        	<div class="products best-product">
-		        							<div class="product">
-							<div class="product-micro">
-	<div class="row product-micro-row">
-		<div class="col col-xs-5">
-			<div class="product-image">
-				<div class="image">
-					<a href="#">
-						<img src="{{ asset('contents/website') }}/assets/images/products/p22.jpg" alt="">
-					</a>					
-				</div><!-- /.image -->
-					
-					
-								</div><!-- /.product-image -->
-		</div><!-- /.col -->
-		<div class="col2 col-xs-7">
-			<div class="product-info">
-				<h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-				<div class="rating rateit-small"></div>
-				<div class="product-price">	
-				<span class="price">
-					$450.99				</span>
-				
-			</div><!-- /.product-price -->
-			
-			</div>
-		</div><!-- /.col -->
-	</div><!-- /.product-micro-row -->
-</div><!-- /.product-micro -->
-      
-						</div>
-		        							<div class="product">
-							<div class="product-micro">
-	<div class="row product-micro-row">
-		<div class="col col-xs-5">
-			<div class="product-image">
-				<div class="image">
-					<a href="#">
-						<img src="{{ asset('contents/website') }}/assets/images/products/p23.jpg" alt="">
-						</a>					
-				</div><!-- /.image -->
-					
-					
-											
-								</div><!-- /.product-image -->
-		</div><!-- /.col -->
-		<div class="col2 col-xs-7">
-			<div class="product-info">
-				<h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-				<div class="rating rateit-small"></div>
-				<div class="product-price">	
-				<span class="price">
-					$450.99				</span>
-				
-			</div><!-- /.product-price -->
-		
-			</div>
-		</div><!-- /.col -->
-	</div><!-- /.product-micro-row -->
-</div><!-- /.product-micro -->
-      
-						</div>
-		        		        	</div>
-	        </div>
-	    		        <div class="item">
-	        	<div class="products best-product">
-		        							<div class="product">
-							<div class="product-micro">
-	<div class="row product-micro-row">
-		<div class="col col-xs-5">
-			<div class="product-image">
-				<div class="image">
-					<a href="#">
-						<img src="{{ asset('contents/website') }}/assets/images/products/p24.jpg" alt="">
-					</a>					
-				</div><!-- /.image -->
-											
-					
-					
-								</div><!-- /.product-image -->
-		</div><!-- /.col -->
-		<div class="col2 col-xs-7">
-			<div class="product-info">
-				<h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-				<div class="rating rateit-small"></div>
-				<div class="product-price">	
-				<span class="price">
-					$450.99				</span>
-				
-			</div><!-- /.product-price -->
-		
-			</div>
-		</div><!-- /.col -->
-	</div><!-- /.product-micro-row -->
-</div><!-- /.product-micro -->
-      
-						</div>
-		        							<div class="product">
-							<div class="product-micro">
-	<div class="row product-micro-row">
-		<div class="col col-xs-5">
-			<div class="product-image">
-				<div class="image">
-					<a href="#">
-						<img src="{{ asset('contents/website') }}/assets/images/products/p25.jpg" alt="">
-					</a>					
-				</div><!-- /.image -->
-					
-					
-								</div><!-- /.product-image -->
-		</div><!-- /.col -->
-		<div class="col2 col-xs-7">
-			<div class="product-info">
-				<h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-				<div class="rating rateit-small"></div>
-				<div class="product-price">	
-				<span class="price">
-					$450.99				</span>
-				
-			</div><!-- /.product-price -->
-			
-			</div>
-		</div><!-- /.col -->
-	</div><!-- /.product-micro-row -->
-</div><!-- /.product-micro -->
-      
-						</div>
-		        		        	</div>
-	        </div>
-	    		        <div class="item">
-	        	<div class="products best-product">
-		        							<div class="product">
-							<div class="product-micro">
-	<div class="row product-micro-row">
-		<div class="col col-xs-5">
-			<div class="product-image">
-				<div class="image">
-					<a href="#">
-						<img src="{{ asset('contents/website') }}/assets/images/products/p26.jpg" alt="">
-								</a>					
-				</div><!-- /.image -->
-											
-					
-					
-								</div><!-- /.product-image -->
-		</div><!-- /.col -->
-		<div class="col2 col-xs-7">
-			<div class="product-info">
-				<h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-				<div class="rating rateit-small"></div>
-				<div class="product-price">	
-				<span class="price">
-					$450.99				</span>
-				
-			</div><!-- /.product-price -->
-	
-			</div>
-		</div><!-- /.col -->
-	</div><!-- /.product-micro-row -->
-</div><!-- /.product-micro -->
-      
-						</div>
-		        							<div class="product">
-							<div class="product-micro">
-	<div class="row product-micro-row">
-		<div class="col col-xs-5">
-			<div class="product-image">
-				<div class="image">
-					<a href="#">
-						<img src="{{ asset('contents/website') }}/assets/images/products/p27.jpg" alt="">
-					</a>					
-				</div><!-- /.image -->
-					
-					
-								</div><!-- /.product-image -->
-		</div><!-- /.col -->
-		<div class="col2 col-xs-7">
-			<div class="product-info">
-				<h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
-				<div class="rating rateit-small"></div>
-				<div class="product-price">	
-				<span class="price">
-					$450.99				</span>
-				
-			</div><!-- /.product-price -->
-	
-			</div>
-		</div><!-- /.col -->
-	</div><!-- /.product-micro-row -->
-</div><!-- /.product-micro -->
-      
-						</div>
-		        		        	</div>
-	        </div>
-	    		    </div>
+					</div>
+				</div>
+			@endforeach
+		</div>
 	</div><!-- /.sidebar-widget-body -->
 </div><!-- /.sidebar-widget -->
