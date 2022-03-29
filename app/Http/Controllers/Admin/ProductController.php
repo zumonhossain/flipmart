@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\MultiImg;
@@ -84,7 +85,7 @@ class ProductController extends Controller{
         
 
         $creator = Auth::user()->id;
-        $slug = uniqid('product-15');
+        $slug = Str::slug($request['product_name'], '-');
 
         $image = $request->file('product_thambnail');
         $name_gen = time().'.'.$image->getClientOriginalExtension();
@@ -177,7 +178,7 @@ class ProductController extends Controller{
         $oldImage = $request['old_img'];
 
         $creator = Auth::user()->id;
-        $slug = uniqid('product-15');
+        $slug = Str::slug($request['product_name'], '-');
         
         unlink($oldImage);
         $image = $request->file('product_thambnail');

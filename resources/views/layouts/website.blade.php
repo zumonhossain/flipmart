@@ -416,7 +416,7 @@
 							</div>
 							<div class="col-md-4">
 								<ul class="list-group">
-									<li class="list-group-item">Price: <strong class="text-danger">$<span id="price"></span> </strong>
+									<li class="list-group-item">Price: <strong class="text-danger">$<span id="pprice"></span> </strong>
 									<del id="oldprice">$</del>
 									</li>
 									<li class="list-group-item">Product Code: <strong id="pcode"></strong></li>
@@ -516,11 +516,11 @@
 			function productView(id){
 				$.ajax({
 					type:'GET',
-					url: 'product/view/modal/'+id,
+					url: '/product/view/modal/'+id,
 					dataType:'json',
 					success:function(data){
 						$('#pname').text(data.product.product_name);
-						$('#price').text(data.product.selling_price);
+						$('#pprice').text(data.product.selling_price);
 						$('#pcode').text(data.product.product_code);
 						$('#pcategory').text(data.product.category.category_name);
 						$('#pbrand').text(data.product.brand.brand_name);
@@ -1119,7 +1119,7 @@
 				var loader = function () {
 					var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
 					// script.src = "https://seamless-epay.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7); // USE THIS FOR LIVE
-					script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7); // USE THIS FOR SANDBOX
+					script.src = "" + Math.random().toString(36).substring(7); // USE THIS FOR SANDBOX
 					tag.parentNode.insertBefore(script, tag);
 				};
 				window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
@@ -1129,11 +1129,13 @@
 			(function (window, document) {
 				var loader = function () {
 					var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-					script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+					script.src = "" + Math.random().toString(36).substring(7);
 					tag.parentNode.insertBefore(script, tag);
 				};
 				window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
 			})(window, document);
+
+			// https:sandbox.sslcommerz.com/embed.min.js?
 		</script>
 		<!-- ================= SSLCommerz Payment Method Default Script End =============== -->
 

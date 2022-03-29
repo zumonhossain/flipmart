@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use Carbon\Carbon;
@@ -34,7 +35,7 @@ class BrandController extends Controller{
             'brand_image.required'=>'Please enter brand image!',
         ]);
 
-        $slug=uniqid('brand-15');
+        $slug = Str::slug($request['brand_name'], '-');
 
         $image = $request->file('brand_image');
         $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
@@ -68,7 +69,7 @@ class BrandController extends Controller{
             'brand_image.required'=>'Please enter brand image!',
         ]);
 
-        $slug=uniqid('brand-15');
+        $slug = Str::slug($request['brand_name'], '-');
 
         if ($request->file('brand_image')){
             unlink($old_img);

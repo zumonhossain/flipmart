@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -45,7 +46,7 @@ class SubSubCategoryController extends Controller{
             'subsubcategory_name.required'=>'Please enter sub subcategory name!',
         ]);
 
-        $slug = uniqid('sub-sub-category-15');
+        $slug = Str::slug($request['subsubcategory_name'], '-');
         $creator = Auth::user()->id;
 		
         SubSubCategory::insertGetId([
@@ -76,7 +77,7 @@ class SubSubCategoryController extends Controller{
             'subsubcategory_name.required'=>'Please enter sub subcategory name!',
         ]);
 
-        $slug = uniqid('sub-sub-category-15');
+        $slug = Str::slug($request['subsubcategory_name'], '-');
         $creator = Auth::user()->id;
         SubSubCategory::where('id',$id)->update([
             'category_id'=>$request['category_id'],

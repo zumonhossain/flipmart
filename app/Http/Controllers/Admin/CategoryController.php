@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Carbon\Carbon;
@@ -34,7 +35,7 @@ class CategoryController extends Controller{
         ]);
 
         $creator = Auth::user()->id;
-        $slug = uniqid('category-15');
+        $slug = Str::slug($request['category_name'], '-');
 
         Category::insertGetId([
             'category_name'=>$request['category_name'],
@@ -65,7 +66,7 @@ class CategoryController extends Controller{
         ]);
 
         $creator = Auth::user()->id;
-        $slug = uniqid('category-15');
+        $slug = Str::slug($request['category_name'], '-');
 
         Category::where('category_status',1)->where('id',$id)->update([
             'category_name'=>$request['category_name'],

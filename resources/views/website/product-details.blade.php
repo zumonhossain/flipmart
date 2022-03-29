@@ -17,8 +17,7 @@
             <div class="container">
                 <div class="breadcrumb-inner">
                     <ul class="list-inline list-unstyled">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Clothing</a></li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
                         <li class='active'>Product Details</li>
                     </ul>
                 </div><!-- /.breadcrumb-inner -->
@@ -234,7 +233,7 @@
                                     <div class="tab-content">
                                         <div id="description" class="tab-pane in active">
                                             <div class="product-tab">
-                                                <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                <p class="text">{!! $product->long_description !!}</p>
                                             </div>	
                                         </div><!-- /.tab-pane -->
 
